@@ -3,11 +3,6 @@
     text-decoration: none;
     color: black;
 }
-/*頁面*/
-.page
-{
-    margin: auto;
-}
 /*選單*/
 .menu
 {
@@ -101,4 +96,23 @@
 {
     margin-left: auto;
     background: rgb(179, 57, 36);
+}
+/*頁面*/
+html,body
+{
+    height:100%;
+}
+body
+{
+    display: flex;
+    margin: 0;
+}
+.page
+{
+    margin: 10px;
+    width: 100%;
+}
+.content
+{
+    height: 90%;
 }

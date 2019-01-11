@@ -1,6 +1,20 @@
+html,body
+{
+    height:100%;
+}
+body
+{
+    display: flex;
+    margin: 0;
+}
 .page
 {
     display: flex;
-    margin: auto;
+    width: 100%;
+    margin: 20px;
     justify-content: center;
+}
+.member
+{
+    width: 60%;
 }

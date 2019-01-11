@@ -9,5 +9,18 @@
     //有登入
     include("../Dao.php");    
     $dao=new Firebase();
-    
 ?>
+
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="member.css">
+</head>
+<html>
+    <body>
+        <div class="page">
+            <div class="member">
+                
+            </div>
+        </div>      
+    </body>
+</html>
