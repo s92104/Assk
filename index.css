@@ -1,0 +1,104 @@
+*
+{
+    text-decoration: none;
+    color: black;
+}
+/*頁面*/
+.page
+{
+    margin: auto;
+}
+/*選單*/
+.menu
+{
+    display: flex;
+    width: 100%;
+    height: 60px;
+    background: rgb(255, 207, 51);
+}
+.menu a
+{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height:100%;
+}
+.menu a:hover
+{
+    background: rgb(247, 119, 33);
+}
+/*選單動畫*/
+.menu a span:before,.menu a span:after
+{
+    content: '';
+    position: absolute;
+    width:10px;
+    height: 10px;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: all 0.3s linear;
+}
+.menu a span:first-child:before
+{
+    border-left: 3px solid red;
+    border-top: 3px solid red;
+}
+.menu a span:first-child::after
+{
+    border-left: 3px solid red;
+    border-bottom: 3px solid red;
+}
+.menu a span:last-child::before
+{
+    border-right: 3px solid red;
+    border-top: 3px solid red;
+}
+.menu a span:last-child:after
+{
+    border-right: 3px solid red;
+    border-bottom: 3px solid red;
+}
+.menu a:hover span:first-child:before
+{
+    opacity: 1;
+    left: 0;
+    top: 0;
+}
+.menu a:hover span:first-child::after
+{
+    opacity: 1;
+    left: 0;
+    top: 100%;
+}
+.menu a:hover span:last-child:before
+{
+    opacity: 1;
+    left: 100%;
+    top: 0;
+}
+.menu a:hover span:last-child::after
+{
+    opacity: 1;
+    left: 100%;
+    top: 100%;
+}
+/*logo*/
+#logo
+{
+    background: black;
+    color: white;
+}
+#logo:hover
+{
+    background: black;
+}
+/*登出*/
+#logout
+{
+    margin-left: auto;
+    background: rgb(179, 57, 36);
+}
