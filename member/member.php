@@ -26,13 +26,16 @@
         <div class="page">
             <div class="member">
                 <table>
-                    <tr>
-                        <td>帳號</td>
-                        <td>密碼</td>
-                    </tr>
-                    <tr id=member>
-                        <!--getMember-->
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>帳號</td>
+                            <!--getMember-->
+                        </tr>
+                        <tr>
+                            <td>密碼</td>
+                            <!--getMember-->
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>      

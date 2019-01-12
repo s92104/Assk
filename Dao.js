@@ -65,15 +65,14 @@ function getMember(username)
 }
 //寫入Html
 function writeMember(doc)
-{  
-    var username=doc.id;
-    var data=doc.data(); 
+{   
+    var tr=document.querySelectorAll("div.member > table > tbody > tr");
+
+    //處理資料
+    var data=doc.data();
+    var username=doc.id; 
     var password=data.password;
-    const member=document.querySelector("#member");
-    let td_username=document.createElement("td");
-    let td_password=document.createElement("td");
-    td_username.textContent=username;
-    td_password.textContent=password;
-    member.appendChild(td_username);
-    member.appendChild(td_password);
+    //寫入資料
+    tr[0].innerHTML+="<td>"+username+"</td>";
+    tr[1].innerHTML+="<td>"+password+"</td>";
 }
