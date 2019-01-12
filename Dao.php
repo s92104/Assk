@@ -7,8 +7,6 @@
         abstract function register($username,$password);        
         abstract function login($username,$password);
         abstract function getMember($username);
-        abstract function getName($username);
-        abstract function getPassword($username);
     }
 
     class Firebase extends Dao
