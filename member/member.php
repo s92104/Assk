@@ -13,7 +13,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="member.css">
+    <link rel="stylesheet" href="css/member.css">
 </head>
 <html>
     <body>
