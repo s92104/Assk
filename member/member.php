@@ -11,7 +11,9 @@
     $dao=new Firebase();
     $username=$_SESSION["username"];
     //讀取會員資料
-    $dao->getMember($username);
+    if($_GET["member"]==null)
+        $dao->getMember($username);
+    $password=$_GET["password"];
 ?>
 
 <head>
@@ -26,11 +28,11 @@
                     <tbody>
                         <tr>
                             <td>帳號</td>
-                            <!--getMember-->
+                            <td><?php echo $username; ?></td>
                         </tr>
                         <tr>
                             <td>密碼</td>
-                            <!--getMember-->
+                            <td><?php echo $password; ?></td>
                         </tr>
                     </tbody>
                 </table>

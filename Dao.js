@@ -60,7 +60,9 @@ function getMember(username)
 {
     var docRef = firestore.collection("user").doc(String(username));
     docRef.get().then(function(doc){
-        writeMember(doc);
+        var data=doc.data();
+        var password=data.password;
+        location.href="member.php?member="+true+"&password="+password;
     });
 }
 //寫入Html
