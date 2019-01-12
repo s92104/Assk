@@ -60,8 +60,20 @@ function getMember(username)
 {
     var docRef = firestore.collection("user").doc(String(username));
     docRef.get().then(function(doc){
-        var data=doc.data();
-        var password=data.password;
-        location.href="member.php?member="+true+"&password="+password;
+        writeMember(doc);
     });
+}
+//寫入Html
+function writeMember(doc)
+{  
+    var username=doc.id;
+    var data=doc.data(); 
+    var password=data.password;
+    const member=document.querySelector("#member");
+    let td_username=document.createElement("td");
+    let td_password=document.createElement("td");
+    td_username.textContent=username;
+    td_password.textContent=password;
+    member.appendChild(td_username);
+    member.appendChild(td_password);
 }

@@ -30,9 +30,8 @@
                         <td>帳號</td>
                         <td>密碼</td>
                     </tr>
-                    <tr>
-                        <td><?php echo $username ?></td>
-                        <td><?php echo $password ?></td>
+                    <tr id=member>
+                        <!--getMember-->
                     </tr>
                 </table>
             </div>
