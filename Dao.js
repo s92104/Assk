@@ -55,3 +55,13 @@ function login(username,password)
         }   
     });
 }
+//會員資料
+function getMember(username)
+{
+    var docRef = firestore.collection("user").doc(String(username));
+    docRef.get().then(function(doc){
+        var data=doc.data();
+        var password=data.password;
+        location.href="member.php?member="+true+"&password="+password;
+    });
+}
