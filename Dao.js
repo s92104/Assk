@@ -40,7 +40,6 @@ function login(username,password)
             if(doc.data().password==password)
             {
                 alert("登入成功");
-                location.href="member.php?username="+username;
             }
             else
             {
@@ -64,17 +63,4 @@ function getMember(username)
         var password=data.password;
         location.href="member.php?member="+true+"&password="+password;
     });
-}
-//寫入Html
-function writeMember(doc)
-{   
-    var tr=document.querySelectorAll("div.member > table > tbody > tr");
-
-    //處理資料
-    var data=doc.data();
-    var username=doc.id; 
-    var password=data.password;
-    //寫入資料
-    tr[0].innerHTML+="<td>"+username+"</td>";
-    tr[1].innerHTML+="<td>"+password+"</td>";
 }

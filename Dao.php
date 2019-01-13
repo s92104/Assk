@@ -2,6 +2,7 @@
 <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
 <script src="../Dao.js"></script>
 <?php
+    session_start();
     abstract class Dao
     {
         abstract function register($username,$password);        
@@ -20,12 +21,15 @@
         function login($username,$password)
         {
             echo "<script>login($username,$password);</script>";
+            //把username放到SESSION
+            $_SESSION["username"]=$username;
+            //讀取會員資料
+            $this->getMember($username);
         }
         //會員資料
         function getMember($username)
         {
             echo "<script>getMember($username);</script>";    
         }
-
     }
 ?>
