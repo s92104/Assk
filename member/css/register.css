@@ -2,11 +2,29 @@
 {
     font-size: 50px;
 }
-.form form
+.form
 {
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .form input
 {
     margin-bottom: 30px;
+}
+.input
+{
+    width:200px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+#submit
+{
+    width:80px;
+    height:40px;
+}
+#login
+{
+    text-decoration: none;
+    color: blue;
 }

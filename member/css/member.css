@@ -18,3 +18,8 @@ body
 {
     width: 800px;
 }
+td
+{
+    width:130px;
+    height: 50px
+}

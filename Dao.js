@@ -22,7 +22,7 @@ function exception(message,link)
     location.href=link;
 }
 //註冊
-function register(username,password,name,phone,address)
+function register(username,password,name,phone,address,email)
 {
     var docRef = firestore.collection("user").doc(username);
     docRef.get().then(function(doc){
@@ -32,7 +32,12 @@ function register(username,password,name,phone,address)
             location.href="register.html";
         }
         else
-            firestore.collection("user").doc(username).set({password:password,name:name,phone:phone,address:address});
+        {
+            alert("註冊成功");
+            firestore.collection("user").doc(username)
+                .set({password:password,name:name,email:email,phone:phone,address:address})
+                .then(function(){location.href="login.html";});   
+        }
     });
 }
 //登入
@@ -69,8 +74,9 @@ function getMember(username)
         var data=doc.data();
         var password=data.password;
         var name=data.name;
+        var email=data.email;
         var phone=data.phone;
         var address=data.address;
-        location.href="member.php?member="+true+"&password="+password+"&name="+name+"&phone="+phone+"&address="+address;
+        location.href="member.php?member="+true+"&password="+password+"&name="+name+"&phone="+phone+"&address="+address+"&email="+email;
     });
 }
