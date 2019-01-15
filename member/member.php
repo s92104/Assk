@@ -14,6 +14,9 @@
     if($_GET["member"]==null)
         $dao->getMember($username);
     $password=$_GET["password"];
+    $name=$_GET["name"];
+    $phone=$_GET["phone"];
+    $address=$_GET["address"];
 ?>
 
 <head>
@@ -33,6 +36,16 @@
                         <tr>
                             <td>密碼</td>
                             <td><?php echo $password; ?></td>
+                        </tr>
+                        <tr>
+                            <td>暱稱</td>
+                            <td><?php echo $name; ?></td>
+                        </tr> <tr>
+                            <td>電話</td>
+                            <td><?php echo $phone; ?></td>
+                        </tr> <tr>
+                            <td>地址</td>
+                            <td><?php echo $address; ?></td>
                         </tr>
                     </tbody>
                 </table>

@@ -22,7 +22,7 @@ function exception(message,link)
     location.href=link;
 }
 //註冊
-function register(username,password)
+function register(username,password,name,phone,address)
 {
     var docRef = firestore.collection("user").doc(username);
     docRef.get().then(function(doc){
@@ -32,7 +32,7 @@ function register(username,password)
             location.href="register.html";
         }
         else
-            firestore.collection("user").doc(username).set({password:password});
+            firestore.collection("user").doc(username).set({password:password,name:name,phone:phone,address:address});
     });
 }
 //登入
@@ -68,6 +68,9 @@ function getMember(username)
     docRef.get().then(function(doc){
         var data=doc.data();
         var password=data.password;
-        location.href="member.php?member="+true+"&password="+password;
+        var name=data.name;
+        var phone=data.phone;
+        var address=data.address;
+        location.href="member.php?member="+true+"&password="+password+"&name="+name+"&phone="+phone+"&address="+address;
     });
 }

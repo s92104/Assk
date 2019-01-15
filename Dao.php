@@ -5,30 +5,21 @@
     session_start();
     abstract class Dao
     {
-        abstract function register($username,$password);        
+        abstract function register($username,$password,$name,$phone,$address);        
         abstract function login($username,$password);
         abstract function getMember($username);
     }
 
     class Firebase extends Dao
-    {
-        
+    {        
         //註冊
-        function register($username,$password)
+        function register($username,$password,$name,$phone,$address)
         {
-            if($username==null || $password==null)
-            {
-                exception("請填資料","register.html");
-            }
-            echo "<script>register('$username','$password');</script>";
+            echo "<script>register('$username','$password','$name','$phone','$address');</script>";
         }
         //登入
         function login($username,$password)
         {
-            if($username==null || $password==null)
-            {
-                exception("請填資料","login.html");
-            }
             echo "<script>login('$username','$password');</script>";
         }
         //會員資料
