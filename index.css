@@ -95,7 +95,12 @@
 #logout
 {
     margin-left: auto;
-    background: rgb(179, 57, 36);
+    background: #996B1F;
+    color: white;
+}
+#logout:hover
+{
+    background: rgb(247, 119, 33);
 }
 /*頁面*/
 html,body
