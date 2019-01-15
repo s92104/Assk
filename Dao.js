@@ -15,10 +15,16 @@ firestore.settings({
   timestampsInSnapshots: true
 });
 
+//警告+轉址
+function exception(message,link)
+{
+    alert(message);
+    location.href=link;
+}
 //註冊
 function register(username,password)
 {
-    var docRef = firestore.collection("user").doc(String(username));
+    var docRef = firestore.collection("user").doc(username);
     docRef.get().then(function(doc){
         if(doc.exists)
         {
@@ -26,13 +32,13 @@ function register(username,password)
             location.href="register.html";
         }
         else
-            firestore.collection("user").doc(String(username)).set({password:password});
+            firestore.collection("user").doc(username).set({password:password});
     });
 }
 //登入
 function login(username,password)
 {
-    var docRef = firestore.collection("user").doc(String(username));
+    var docRef = firestore.collection("user").doc(username);
     docRef.get().then(function(doc){
         if(doc.exists)
         {
@@ -40,6 +46,7 @@ function login(username,password)
             if(doc.data().password==password)
             {
                 alert("登入成功");
+                location.href="member.php?username="+username;
             }
             else
             {
@@ -57,7 +64,7 @@ function login(username,password)
 //會員資料
 function getMember(username)
 {
-    var docRef = firestore.collection("user").doc(String(username));
+    var docRef = firestore.collection("user").doc(username);
     docRef.get().then(function(doc){
         var data=doc.data();
         var password=data.password;

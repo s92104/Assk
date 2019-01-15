@@ -12,24 +12,35 @@
 
     class Firebase extends Dao
     {
+        
         //註冊
         function register($username,$password)
         {
-            echo "<script>register($username,$password);</script>";
+            if($username==null || $password==null)
+            {
+                exception("請填資料","register.html");
+            }
+            echo "<script>register('$username','$password');</script>";
         }
         //登入
         function login($username,$password)
         {
-            echo "<script>login($username,$password);</script>";
-            //把username放到SESSION
-            $_SESSION["username"]=$username;
-            //讀取會員資料
-            $this->getMember($username);
+            if($username==null || $password==null)
+            {
+                exception("請填資料","login.html");
+            }
+            echo "<script>login('$username','$password');</script>";
         }
         //會員資料
         function getMember($username)
         {
-            echo "<script>getMember($username);</script>";    
+            echo "<script>getMember('$username');</script>";    
         }
+    }
+
+    //警告+轉址
+    function exception($message,$link)
+    {
+        echo "<script>exception('$message','$link');</script>";
     }
 ?>
