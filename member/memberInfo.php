@@ -28,26 +28,26 @@
         <tbody>
             <tr>
                 <td>帳號</td>
-                <td><?php echo $username; ?></td>
+                <td><?=$username?></td>
             </tr>
             <tr>
                 <td>密碼</td>
-                <td><?php echo $password; ?></td>
+                <td><?=$password?></td>
             </tr>
             <tr>
                 <td>暱稱</td>
-                <td><?php echo $name; ?></td>
+                <td><?=$name?></td>
             </tr>
             <tr>
                 <td>電子信箱</td>
-                <td><?php echo $email; ?></td>
+                <td><?=$email?></td>
             </tr> 
             <tr>
                 <td>電話</td>
-                <td><?php echo $phone; ?></td>
+                <td><?=$phone?></td>
             </tr> <tr>
                 <td>地址</td>
-                <td><?php echo $address; ?></td>
+                <td><?=$address?></td>
             </tr>
         </tbody>
      </table>
