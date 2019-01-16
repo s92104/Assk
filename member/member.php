@@ -13,11 +13,14 @@
     //讀取會員資料
     if($_GET["member"]==null)
         $dao->getMember($username);
-    $password=$_GET["password"];
-    $name=$_GET["name"];
-    $email=$_GET["email"];
-    $phone=$_GET["phone"];
-    $address=$_GET["address"];
+    //解析JSON
+    $json=$_GET["member"];
+    $member=json_decode($json);
+    $password=$member->password;
+    $name=$member->name;
+    $email=$member->email;
+    $phone=$member->phone;
+    $address=$member->address;
 ?>
 
 <head>

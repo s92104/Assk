@@ -22,8 +22,16 @@ function exception(message,link)
     location.href=link;
 }
 //註冊
-function register(username,password,name,phone,address,email)
+function register(json)
 {
+    var member=JSON.parse(json);
+    var username=member.username;
+    var password=member.password;
+    var name=member.name;
+    var email=member.email;
+    var phone=member.phone;
+    var address=member.address;
+
     var docRef = firestore.collection("user").doc(username);
     docRef.get().then(function(doc){
         if(doc.exists)
@@ -77,6 +85,9 @@ function getMember(username)
         var email=data.email;
         var phone=data.phone;
         var address=data.address;
-        location.href="member.php?member="+true+"&password="+password+"&name="+name+"&phone="+phone+"&address="+address+"&email="+email;
+        //包成JSON
+        var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
+        var json=JSON.stringify(member);
+        location.href="member.php?member="+json;
     });
 }
