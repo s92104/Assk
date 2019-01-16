@@ -7,7 +7,8 @@
     {
         abstract function register($json);        
         abstract function login($username,$password);
-        abstract function getMember($username);
+        abstract function getMember($username,$link);
+        abstract function editMember($username,$json);
     }
 
     class Firebase extends Dao
@@ -23,9 +24,14 @@
             echo "<script>login('$username','$password');</script>";
         }
         //會員資料
-        function getMember($username)
+        function getMember($username,$link)
         {
-            echo "<script>getMember('$username');</script>";    
+            echo "<script>getMember('$username','$link');</script>";    
+        }
+        //修改資料
+        function editMember($username,$json)
+        {
+            echo "<script>editMember('$username','$json');</script>";
         }
     }
 

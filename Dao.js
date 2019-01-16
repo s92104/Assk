@@ -31,6 +31,8 @@ function register(json)
     var email=member.email;
     var phone=member.phone;
     var address=member.address;
+    //包成JSON
+    var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
 
     var docRef = firestore.collection("user").doc(username);
     docRef.get().then(function(doc){
@@ -42,9 +44,9 @@ function register(json)
         else
         {
             alert("註冊成功");
-            firestore.collection("user").doc(username)
-                .set({password:password,name:name,email:email,phone:phone,address:address})
-                .then(function(){location.href="login.html";});   
+            firestore.collection("user").doc(username).set(member).then(function(){
+                location.href="login.html"; 
+            });  
         }
     });
 }
@@ -75,10 +77,9 @@ function login(username,password)
     });
 }
 //會員資料
-function getMember(username)
+function getMember(username,link)
 {
-    var docRef = firestore.collection("user").doc(username);
-    docRef.get().then(function(doc){
+    firestore.collection("user").doc(username).get().then(function(doc){
         var data=doc.data();
         var password=data.password;
         var name=data.name;
@@ -88,6 +89,22 @@ function getMember(username)
         //包成JSON
         var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
         var json=JSON.stringify(member);
-        location.href="member.php?member="+json;
+        location.href=link+"?member="+json;
     });
+}
+//修改資料
+function editMember(username,json)
+{
+    var member=JSON.parse(json);
+    var password=member.password;
+    var name=member.name;
+    var email=member.email;
+    var phone=member.phone;
+    var address=member.address;
+    //包成JSON
+    var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
+
+    firestore.collection("user").doc(username).set(member).then(function(){
+        location.href="editForm.php?member="+json;
+    });    
 }

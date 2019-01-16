@@ -1,3 +1,8 @@
+*
+{
+    text-decoration: none;
+    color: black;
+}
 html,body
 {
     height:100%;
@@ -14,12 +19,100 @@ body
     margin: 20px;
     justify-content: center;
 }
+/*選單*/
+.menu
+{
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+}
+.menu a
+{
+    height: 50px;
+    line-height: 50px;
+    text-indent: 20px;
+    background: lightgray;
+}
+.menu a:hover
+{
+    background: lightcoral;
+}
+/*會員資料*/
 .member
 {
-    width: 800px;
+    width: 100%;
+    height: 95%;
+    border-radius: 5px;
+    border: 1px solid gray;
 }
-td
+.member table
 {
-    width:130px;
-    height: 50px
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+}
+.member td
+{
+    border: 1px solid gray;
+}
+.member td:first-child
+{
+    background: lightblue;
+    width: 20%;
+}
+/*修改資料*/
+.editMember
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title
+{
+    font-size: 50px;
+}
+.form
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.form form
+{
+    display: flex;
+    flex-direction: column;
+}
+.form input
+{
+    margin-bottom: 10px;
+}
+.input
+{
+    width:200px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    text-indent: 10px;
+}
+#email
+{
+    width:400px;
+}
+#address
+{
+    width: 400px;
+}
+#submit
+{
+    width:80px;
+    height:40px;
+    align-self: center;
+}
+#login
+{
+    text-decoration: none;
+    color: blue;
 }
