@@ -1,3 +1,7 @@
+body
+{
+    text-align: center;
+}
 .title
 {
     font-size: 50px;
@@ -6,6 +10,11 @@
 {
     margin-top: 20px;
     margin-bottom: 20px;
+    position: relative;
+    width: 50%;
+    left: 50%;
+    transform: translate(-100px,0);
+    text-align: left;
 }
 .form input
 {
@@ -17,11 +26,21 @@
     height: 25px;
     border-radius: 5px;
     border: 1px solid gray;
+    text-indent: 10px;
+}
+#email
+{
+    width:400px;
+}
+#address
+{
+    width: 400px;
 }
 #submit
 {
     width:80px;
     height:40px;
+    transform: translate(60px,0);
 }
 #login
 {

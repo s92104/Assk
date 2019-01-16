@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="css/register.css">
 </head>
 <html>
-    <body align="center">
+    <body>
         <div class="title">註冊帳號</div>
-        <div class="form" >
+        <div class="form">
             <form method="post" action="register.php">
                 帳號<br>
                 <input type="text" name="username" required class="input"><br>
@@ -15,12 +15,12 @@
                 暱稱<br>
                 <input type="text" name="name" class="input"><br>
                 電子信箱<br>
-                <input type="email" name="email" class="input"><br>
+                <input type="email" name="email" class="input" id="email"><br>
                 電話<br>
                 <input type="tel" name="phone" pattern="\d+" class="input"><br>
                 地址<br>
-                <input type="text" name="address" class="input"><br>
-                <input type="submit" value="註冊" id="submit">
+                <input type="text" name="address" class="input" id="address"><br>
+                <input type="submit" value="註冊" id="submit"></form>
             </form>
         </div>   
         <a href="login.html" id="login">返回登入</a>     

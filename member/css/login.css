@@ -17,6 +17,7 @@
     height: 30px;
     border-radius: 5px;
     border: 1px solid gray;
+    text-indent: 10px;
 }
 #submit
 {
