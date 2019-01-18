@@ -1,0 +1,45 @@
+/*會員資料*/
+body
+{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+.member
+{
+    width: 60%;
+    height: 100%;
+    border-radius: 5px;
+    border: 1px solid gray;
+    box-sizing: border-box;
+}
+.member table
+{
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+}
+.member td
+{
+    border: 1px solid gray;
+}
+.member td:first-child
+{
+    background: lightblue;
+    width: 20%;
+}
+/*大頭貼*/
+.head
+{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 18%;
+    height:100%;
+}
+.head img
+{
+    width:250px;
+    height:200px;
+}

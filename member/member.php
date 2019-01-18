@@ -21,7 +21,7 @@
                 <a href="editForm.php" target="memberContent">修改資料</a>
             </div>
             <!--內容-->
-            <iframe name="memberContent" src="memberInfo.php" width="60%" frameborder="0"></iframe>
+            <iframe name="memberContent" src="memberInfo.php" width="100%" frameborder="0"></iframe>
         </div>      
     </body>
 </html>

@@ -18,10 +18,11 @@
     $email=$member->email;
     $phone=$member->phone;
     $address=$member->address;
+    $image=$member->image;
 ?>
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="css/member.css">
+    <link rel="stylesheet" href="css/memberInfo.css">
 </head>
 <div class="member">    
     <table>
@@ -51,6 +52,10 @@
             </tr>
         </tbody>
      </table>
+</div>
+<div class="head">
+    大頭貼
+    <img src="<?=$image?>">
 </div>
 
         

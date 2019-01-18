@@ -86,8 +86,9 @@ function getMember(username,link)
         var email=data.email;
         var phone=data.phone;
         var address=data.address;
+        var image=escape(data.image);
         //包成JSON
-        var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
+        var member={"password":password,"name":name,"email":email,"phone":phone,"address":address,"image":image};
         var json=JSON.stringify(member);
         location.href=link+"?member="+json;
     });
@@ -101,7 +102,6 @@ function editMember(username,json)
     var email=member.email;
     var phone=member.phone;
     var address=member.address;
-    //處理圖片
     
     //包成JSON
     var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
@@ -111,18 +111,26 @@ function editMember(username,json)
     });    
 }
 //上傳圖片
-function upload(username,id)
+function uploadFile(username,fileId,imageId,progressId)
 {
-    var fileButton=document.getElementById(id);
+    var fileButton=document.getElementById(fileId);
+    //獲取檔案
     var file=fileButton.files[0];
     var storageRef=firebase.storage().ref(username+"/"+file.name);
     var task = storageRef.put(file);
+    var progress=document.getElementById(progressId);
     task.on('state_changed',function(snapshot){
-
+        //顯示進度
+        var percentage=(snapshot.bytesTransferred/snapshot.totalBytes)*100;  
+        progress.value=percentage;
     },function(error){
-
-    },function(){
-         var url=task.snapshot.downloadURL;
-         console.log(url);
-    })
+        alert("error");
+    },function(){ 
+        task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            firestore.collection("user").doc(username).update({"image":downloadURL});
+            //讀取圖片
+            var image=document.getElementById(imageId);
+            image.src=downloadURL;    
+        });
+    }); 
 }

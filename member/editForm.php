@@ -17,10 +17,14 @@
     $email=$member->email;
     $phone=$member->phone;
     $address=$member->address;
+    if($member->image!=null)
+        $image=$member->image;
+    else
+        $image="../welcome/welcome.jpg";
 ?>
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="css/member.css">
+    <link rel="stylesheet" href="css/editForm.css">
 </head>
 
 <div class="editMember">
@@ -39,13 +43,15 @@
             <input type="tel" name="phone" pattern="\d+" class="input" value=<?=$phone?>><br>
             地址<br>
             <input type="text" name="address" class="input" id="address" value=<?=$address?>><br>
-            <div class="image">
-                大頭貼
-                <img src="../welcome/welcome.jpg" id="image">
-                <input type="file" id="file">
-                <button type="button" onclick="upload('<?=$username?>','file')">上傳</button>
-            </div>
+            
             <input type="submit" value="儲存" id="submit"></form>
         </form>
-    </div>                  
+    </div>                                
+</div>
+<div class="image">
+    大頭貼
+    <img src="<?=$image?>" id="image">
+    <input type="file" id="file"><br>
+    <button type="button" onclick="uploadFile('<?=$username?>','file','image','progress')">上傳</button>
+    <progress value="0" max="100" id="progress">0%</progress>
 </div>

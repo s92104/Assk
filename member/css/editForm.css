@@ -1,0 +1,76 @@
+/*修改資料*/
+.editMember
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title
+{
+    font-size: 50px;
+}
+/*表單*/
+.form
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.form form
+{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.form input
+{
+    margin-bottom: 10px;
+}
+.input
+{
+    width:200px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    text-indent: 10px;
+}
+#email
+{
+    width:400px;
+}
+#address
+{
+    width: 400px;
+}
+#submit
+{
+    width:80px;
+    height:40px;
+    align-self: center;
+    margin-top: 10px;
+}
+/*大頭貼*/
+.image
+{
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    right: 0;
+}
+.image img
+{
+    width:250px;
+    height: 200px;
+    margin-bottom: 10px;
+}
+.image input
+{
+    margin-bottom: 10px;
+    width: 100%;
+}
+.image progress
+{
+    width: 70%;
+}
