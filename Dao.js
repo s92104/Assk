@@ -107,9 +107,9 @@ function editMember(username,json)
     //包成JSON
     var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
 
-    firestore.collection("user").doc(username).set(member).then(function(){
+    firestore.collection("user").doc(username).update(member).then(function(){
         alert("修改成功");
-        location.href="editForm.php?member="+json;
+        getMember(username,"editForm.php");
     });    
 }
 //上傳圖片
@@ -129,10 +129,12 @@ function uploadFile(username,fileId,imageId,progressId)
         alert("error");
     },function(){ 
         task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-            firestore.collection("user").doc(username).update({"image":downloadURL});
-            //讀取圖片
-            var image=document.getElementById(imageId);
-            image.src=downloadURL;    
+            firestore.collection("user").doc(username).update({"image":downloadURL}).then(function(){
+                alert("上傳成功");
+                 //讀取圖片
+                var image=document.getElementById(imageId);
+                image.src=downloadURL;
+            });              
         });
     }); 
 }
