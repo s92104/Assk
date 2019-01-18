@@ -1,4 +1,8 @@
 /*修改資料*/
+body
+{
+    margin-top: 20px;
+}
 .editMember
 {
     width: 100%;
@@ -49,7 +53,7 @@
     width:80px;
     height:40px;
     align-self: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 /*大頭貼*/
 .image
