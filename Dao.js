@@ -44,8 +44,8 @@ function register(json)
         }
         else
         {
-            alert("註冊成功");
             firestore.collection("user").doc(username).set(member).then(function(){
+                alert("註冊成功");
                 location.href="login.html"; 
             });  
         }
@@ -108,6 +108,7 @@ function editMember(username,json)
     var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
 
     firestore.collection("user").doc(username).set(member).then(function(){
+        alert("修改成功");
         location.href="editForm.php?member="+json;
     });    
 }
