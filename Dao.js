@@ -118,6 +118,8 @@ function uploadFile(username,fileId,imageId,progressId)
     var fileButton=document.getElementById(fileId);
     //獲取檔案
     var file=fileButton.files[0];
+    if(file==null)
+        return;
     var storageRef=firebase.storage().ref(username+"/"+file.name);
     var task = storageRef.put(file);
     var progress=document.getElementById(progressId);
