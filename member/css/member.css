@@ -27,6 +27,7 @@ body
     flex-direction: column;
     position: absolute;
     left: 0;
+    top: 20px;
 }
 .menu a
 {

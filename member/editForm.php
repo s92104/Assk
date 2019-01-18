@@ -47,12 +47,12 @@
             
             <input type="submit" value="儲存" id="submit"></form>
         </form>
+        <div class="image">
+            大頭貼
+            <img src="<?=$image?>" id="image">
+            <input type="file" id="file"><br>
+            <button type="button" onclick="uploadFile('<?=$username?>','file','image','progress')">上傳</button>
+            <progress value="0" max="100" id="progress">0%</progress>
+        </div>
     </div>                                
-</div>
-<div class="image">
-    大頭貼
-    <img src="<?=$image?>" id="image">
-    <input type="file" id="file"><br>
-    <button type="button" onclick="uploadFile('<?=$username?>','file','image','progress')">上傳</button>
-    <progress value="0" max="100" id="progress">0%</progress>
 </div>
