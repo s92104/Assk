@@ -22,6 +22,7 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/member.css">
 </head>
+
 <div class="editMember">
     <div class="title">修改資料</div>
     <div class="form">
@@ -33,11 +34,17 @@
             暱稱<br>
             <input type="text" name="name" class="input" value=<?=$name?>><br>
             電子信箱<br>
-            <input type="email" name="email" class="input" value=<?=$email?>><br>
+            <input type="email" name="email" class="input" id="email" value=<?=$email?>><br>
             電話<br>
             <input type="tel" name="phone" pattern="\d+" class="input" value=<?=$phone?>><br>
             地址<br>
             <input type="text" name="address" class="input" id="address" value=<?=$address?>><br>
+            <div class="image">
+                大頭貼
+                <img src="../welcome/welcome.jpg" id="image">
+                <input type="file" id="file">
+                <button type="button" onclick="upload('<?=$username?>','file')">上傳</button>
+            </div>
             <input type="submit" value="儲存" id="submit"></form>
         </form>
     </div>                  

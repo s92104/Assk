@@ -1,5 +1,6 @@
 <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-storage.js"></script>
 <script src="../Dao.js"></script>
 <?php
     session_start();

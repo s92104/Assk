@@ -101,10 +101,28 @@ function editMember(username,json)
     var email=member.email;
     var phone=member.phone;
     var address=member.address;
+    //處理圖片
+    
     //包成JSON
     var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
 
     firestore.collection("user").doc(username).set(member).then(function(){
         location.href="editForm.php?member="+json;
     });    
+}
+//上傳圖片
+function upload(username,id)
+{
+    var fileButton=document.getElementById(id);
+    var file=fileButton.files[0];
+    var storageRef=firebase.storage().ref(username+"/"+file.name);
+    var task = storageRef.put(file);
+    task.on('state_changed',function(snapshot){
+
+    },function(error){
+
+    },function(){
+         var url=task.snapshot.downloadURL;
+         console.log(url);
+    })
 }
