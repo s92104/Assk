@@ -31,8 +31,9 @@ function register(json)
     var email=member.email;
     var phone=member.phone;
     var address=member.address;
+    var image=member.image;
     //包成JSON
-    var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
+    var member={"password":password,"name":name,"email":email,"phone":phone,"address":address,"image":image};
 
     var docRef = firestore.collection("user").doc(username);
     docRef.get().then(function(doc){

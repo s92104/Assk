@@ -17,10 +17,11 @@
     $email=$member->email;
     $phone=$member->phone;
     $address=$member->address;
-    if($member->image!=null)
+    $image=$member->image;
+    if($image!="")
         $image=$member->image;
     else
-        $image="../welcome/welcome.jpg";
+        $image="img/noImage.png";
 ?>
 <head>
     <meta charset="utf-8"/>

@@ -19,6 +19,10 @@
     $phone=$member->phone;
     $address=$member->address;
     $image=$member->image;
+    if($image!="")
+        $image=$member->image;
+    else
+        $image="img/noImage.png";
 ?>
 <head>
     <meta charset="utf-8"/>

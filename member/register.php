@@ -14,8 +14,9 @@
         $address="";
     if($email==null)
         $email="";
+    $image="";
     //包成JSON
-    $member=array("username"=>$username,"password"=>$password,"name"=>$name,"email"=>$email,"phone"=>$phone,"address"=>$address);
+    $member=array("username"=>$username,"password"=>$password,"name"=>$name,"email"=>$email,"phone"=>$phone,"address"=>$address,"image"=>$image);
     $json=json_encode($member);
     //資料庫   
     $dao=new Firebase();
