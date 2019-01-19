@@ -12,8 +12,7 @@ body
 {
     display: flex;
     width: 100%;
-    margin: 5px;
-    justify-content: center;
+    margin: 20px 0;
 }
 /*選單*/
 .menu
@@ -23,7 +22,6 @@ body
     flex-direction: column;
     position: absolute;
     left: 0;
-    top: 20px;
 }
 .menu a
 {

@@ -28,38 +28,43 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/memberInfo.css">
 </head>
-<div class="member">    
-    <table>
-        <tbody>
-            <tr>
-                <td>帳號</td>
-                <td><?=$username?></td>
-            </tr>
-            <tr>
-                <td>密碼</td>
-                <td><?=$password?></td>
-            </tr>
-            <tr>
-                <td>暱稱</td>
-                <td><?=$name?></td>
-            </tr>
-            <tr>
-                <td>電子信箱</td>
-                <td><?=$email?></td>
-            </tr> 
-            <tr>
-                <td>電話</td>
-                <td><?=$phone?></td>
-            </tr> <tr>
-                <td>地址</td>
-                <td><?=$address?></td>
-            </tr>
-        </tbody>
-     </table>
-</div>
-<div class="head">
-    大頭貼
-    <img src="<?=$image?>">
-</div>
+<html>
+    <body>
+        <div class="member">    
+            <table>
+                <tbody>
+                    <tr>
+                        <td>帳號</td>
+                        <td><?=$username?></td>
+                    </tr>
+                    <tr>
+                        <td>密碼</td>
+                        <td><?=$password?></td>
+                    </tr>
+                    <tr>
+                        <td>暱稱</td>
+                        <td><?=$name?></td>
+                    </tr>
+                    <tr>
+                        <td>電子信箱</td>
+                        <td><?=$email?></td>
+                    </tr> 
+                    <tr>
+                        <td>電話</td>
+                        <td><?=$phone?></td>
+                    </tr> <tr>
+                        <td>地址</td>
+                        <td><?=$address?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="head">
+            大頭貼
+            <img src="<?=$image?>">
+        </div>                
+    </body>
+</html>
+
 
         

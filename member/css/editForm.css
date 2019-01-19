@@ -1,7 +1,7 @@
 /*修改資料*/
 body
 {
-    margin-top: 20px;
+    margin: 0;
 }
 .editMember
 {
@@ -18,9 +18,9 @@ body
 .form
 {
     display: flex;
+    position: relative;
     justify-content: center;
     margin-top: 20px;
-    position: relative;
     width: 100%;
 }
 .form form
@@ -53,15 +53,13 @@ body
     width:80px;
     height:40px;
     align-self: center;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 /*大頭貼*/
 .image
 {
     width: 20%;
-    height: 100%;
     position: absolute;
-    top:0;
     right: 0;
 }
 .image img

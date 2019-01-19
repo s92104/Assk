@@ -50,7 +50,7 @@
             <input type="submit" value="儲存" id="submit"></form>
         </form>
         <div class="image">
-            大頭貼
+            大頭貼<br>
             <img src=<?=$image?> id="image">
             <input type="file" id="file"><br>
             <button type="button" onclick="uploadFile('<?=$username?>','file','image','progress','imageUrl')">上傳</button>
