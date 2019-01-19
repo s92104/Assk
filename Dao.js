@@ -103,9 +103,9 @@ function editMember(username,json)
     var email=member.email;
     var phone=member.phone;
     var address=member.address;
-    
+    var image=member.image;
     //包成JSON
-    var member={"password":password,"name":name,"email":email,"phone":phone,"address":address};
+    var member={"password":password,"name":name,"email":email,"phone":phone,"address":address,"image":image};
 
     firestore.collection("user").doc(username).update(member).then(function(){
         alert("修改成功");
@@ -113,7 +113,7 @@ function editMember(username,json)
     });    
 }
 //上傳圖片
-function uploadFile(username,fileId,imageId,progressId)
+function uploadFile(username,fileId,imageId,progressId,inputId)
 {
     var fileButton=document.getElementById(fileId);
     //獲取檔案
@@ -131,12 +131,13 @@ function uploadFile(username,fileId,imageId,progressId)
         alert("error");
     },function(){ 
         task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-            firestore.collection("user").doc(username).update({"image":downloadURL}).then(function(){
-                alert("上傳成功");
-                 //讀取圖片
-                var image=document.getElementById(imageId);
-                image.src=downloadURL;
-            });              
+            alert("上傳成功");
+            //讀取圖片
+            var image=document.getElementById(imageId);
+            image.src=downloadURL;   
+            //丟給隱藏欄位
+            var input=document.getElementById(inputId);
+            input.value=downloadURL;
         });
     }); 
 }

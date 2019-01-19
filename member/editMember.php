@@ -7,6 +7,7 @@
     $email=$_POST["email"];
     $phone=$_POST["phone"];
     $address=$_POST["address"];
+    $image=$_POST["image"];
     if($name==null)
         $name="";
     if($phone==null)
@@ -16,7 +17,7 @@
     if($email==null)
         $email="";
     //包成JSON
-    $member=array("password"=>$password,"name"=>$name,"email"=>$email,"phone"=>$phone,"address"=>$address);
+    $member=array("password"=>$password,"name"=>$name,"email"=>$email,"phone"=>$phone,"address"=>$address,"image"=>$image);
     $json=json_encode($member);
     //資料庫   
     $dao=new Firebase();

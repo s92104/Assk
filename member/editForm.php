@@ -18,10 +18,6 @@
     $phone=$member->phone;
     $address=$member->address;
     $image=$member->image;
-    if($image!="")
-        $image=$member->image;
-    else
-        $image="img/noImage.png";
 ?>
 <head>
     <meta charset="utf-8"/>
@@ -44,14 +40,16 @@
             <input type="tel" name="phone" pattern="\d+" class="input" value=<?=$phone?>><br>
             地址<br>
             <input type="text" name="address" class="input" id="address" value=<?=$address?>><br>
-            
+            <!-- 隱藏欄位 -->
+            <input type="hidden" name="image" id="imageUrl" value=<?=$image?>>
+
             <input type="submit" value="儲存" id="submit"></form>
         </form>
         <div class="image">
             大頭貼
-            <img src="<?=$image?>" id="image">
+            <img src=<?=$image?> id="image">
             <input type="file" id="file"><br>
-            <button type="button" onclick="uploadFile('<?=$username?>','file','image','progress')">上傳</button>
+            <button type="button" onclick="uploadFile('<?=$username?>','file','image','progress','imageUrl')">上傳</button>
             <progress value="0" max="100" id="progress">0%</progress>
         </div>
     </div>                                
