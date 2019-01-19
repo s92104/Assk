@@ -17,7 +17,11 @@
     $email=$member->email;
     $phone=$member->phone;
     $address=$member->address;
-    $image=$member->image;
+    $imageUrl=$member->image;
+    if($imageUrl!="")
+        $image=$imageUrl;
+    else
+        $image="img/noImage.png";
 ?>
 <head>
     <meta charset="utf-8"/>
@@ -41,7 +45,7 @@
             地址<br>
             <input type="text" name="address" class="input" id="address" value=<?=$address?>><br>
             <!-- 隱藏欄位 -->
-            <input type="hidden" name="image" id="imageUrl" value=<?=$image?>>
+            <input type="hidden" name="image" id="imageUrl" value=<?=$imageUrl?>>
 
             <input type="submit" value="儲存" id="submit"></form>
         </form>

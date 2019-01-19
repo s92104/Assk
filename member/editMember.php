@@ -16,6 +16,8 @@
         $address="";
     if($email==null)
         $email="";
+    if($image==null)
+        $image="";
     //包成JSON
     $member=array("password"=>$password,"name"=>$name,"email"=>$email,"phone"=>$phone,"address"=>$address,"image"=>$image);
     $json=json_encode($member);
