@@ -8,7 +8,7 @@
         <div class="page">
             <!--選單-->
             <div class="menu">
-                <a id="logo" href="index.html">Kick You Assk</a>
+                <a id="logo" href="index.php">Kick You Assk</a>
                 <a href="">熱門<span></span><span></span></a>             
                 <a href="">諮商<span></span><span></span></a>
                 <a href="">文章<span></span><span></span></a>
