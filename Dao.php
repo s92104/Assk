@@ -41,11 +41,4 @@
     {
         echo "<script>exception('$message','$link');</script>";
     }
-    //判斷是否登入
-    function isLogin()
-    {
-        if($_SESSION["username"]==null)
-            return false;
-        return true;
-    }
 ?>
