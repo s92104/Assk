@@ -19,7 +19,7 @@
     $phone=$member->phone;
     $address=$member->address;
     $image=$member->image;
-    if($image!="")
+    if(!empty($image))
         $image=$member->image;
     else
         $image="img/noImage.png";
