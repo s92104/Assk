@@ -10,6 +10,7 @@
         abstract function login($username,$password);
         abstract function getMember($username,$link);
         abstract function editMember($username,$json);
+        abstract function getBoard($link,$id);
     }
 
     class Firebase extends Dao
@@ -33,6 +34,11 @@
         function editMember($username,$json)
         {
             echo "<script>editMember('$username','$json');</script>";
+        }
+        //讀取看板
+        function getBoard($link,$id)
+        {
+            echo "<script>getBoard('$link','$id');</script>";
         }
     }
 

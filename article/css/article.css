@@ -23,7 +23,7 @@ body
 {
     display: flex;
     width: 15%;
-    background: red;
+    border: 1px solid black;
 }
 .boardcontent
 {

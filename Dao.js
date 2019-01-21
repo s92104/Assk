@@ -141,3 +141,28 @@ function uploadFile(username,fileId,imageId,progressId,inputId)
         });
     }); 
 }
+//讀取看板
+function getBoard(link,id)
+{
+    var board=[];
+
+    firestore.collection("board").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            board.push(doc.id);
+        });
+        var json=JSON.stringify(board);
+        location.href=link+"?board="+json;
+    });
+}
+//寫入看板
+function writeBoard(json,id)
+{
+    var board=JSON.parse(json);
+    var ul=document.getElementById(id);
+    for(var i=0;i<board.length;i++)
+    {
+        var li=document.createElement("li");
+        li.textContent=board[i];
+        ul.appendChild(li);
+    }
+}
