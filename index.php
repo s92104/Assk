@@ -9,9 +9,8 @@
             <!--選單-->
             <div class="menu">
                 <a id="logo" href="index.php">Kick You Assk</a>
-                <a href="">熱門<span></span><span></span></a>             
-                <a href="">諮商<span></span><span></span></a>
-                <a href="">文章<span></span><span></span></a>
+                <a href="" target="content">諮商<span></span><span></span></a>
+                <a href="article/article.html" target="content">文章<span></span><span></span></a>
                 <a href="member/member.php" target="content">會員<span></span><span></span></a>
                 <a id="logout" href="member/logout.php" target="content">登出<span></span><span></span></a>
             </div>

@@ -3,6 +3,23 @@
     text-decoration: none;
     color: black;
 }
+/*頁面*/
+html,body
+{
+    height:100%;
+}
+body
+{
+    display: flex;
+    margin: 0;
+}
+.page
+{
+    margin: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
 /*選單*/
 .menu
 {
@@ -100,21 +117,4 @@
 #logout:hover
 {
     background: rgb(247, 119, 33);
-}
-/*頁面*/
-html,body
-{
-    height:100%;
-}
-body
-{
-    display: flex;
-    margin: 0;
-}
-.page
-{
-    margin: 10px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
 }

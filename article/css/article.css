@@ -1,0 +1,49 @@
+*
+{
+    text-decoration: none;
+    color: black;
+}
+html,body
+{
+    height: 100%;
+}
+body
+{
+    margin: 0;
+    display: flex;
+}
+.page
+{
+    margin: 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.board
+{
+    width: 15%;
+    background: red;
+}
+.article
+{
+    width: 80%;
+    background: blue;
+    display: flex;
+    flex-direction: column;
+}
+.menu
+{
+    display: flex;
+    height: 50px; 
+    line-height: 50px;
+}
+.menu a
+{
+    width: 80px;
+    text-align: center; 
+    background: green;
+}
+iframe
+{
+    background: yellow;
+}
