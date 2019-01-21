@@ -162,7 +162,11 @@ function writeBoard(json,id)
     for(var i=0;i<board.length;i++)
     {
         var li=document.createElement("li");
-        li.textContent=board[i];
+        var a=document.createElement("a");
+        a.textContent=board[i];
+        a.href="article.php?board="+board[i];
+        a.target="article";
+        li.appendChild(a);
         ul.appendChild(li);
     }
 }

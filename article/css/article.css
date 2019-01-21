@@ -22,17 +22,27 @@ body
 .board
 {
     display: flex;
+    flex-direction: column;
     width: 15%;
-    border: 1px solid black;
+    background: lightgreen;
 }
 .boardcontent
 {
-    margin: 10px;
+    margin: 10px 10px 0 10px;
+    height: 100%;
+}
+.board a
+{
+    background: lightsalmon;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid black;
+    margin: 0 10px 10px 10px;
 }
 .article
 {
     width: 80%;
-    background: blue;
     display: flex;
     flex-direction: column;
 }
@@ -41,6 +51,7 @@ body
     display: flex;
     height: 50px; 
     line-height: 50px;
+    margin: 0 10px;
 }
 .menu a
 {
@@ -48,12 +59,16 @@ body
     text-align: center; 
     background: green;
 }
+#post
+{
+    margin-left: auto;
+}
 .articlecontent
 {
     margin: 10px;
     height: 100%;
 }
-iframe
+.articlecontent iframe
 {
     background: yellow;
 }
