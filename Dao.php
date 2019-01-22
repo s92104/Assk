@@ -12,6 +12,7 @@
         abstract function editMember($username,$json);
         abstract function getBoard($link,$id);
         abstract function addBoard($boardname,$boarddetail);
+        abstract function applyBoard($boardname,$boarddetail);
         abstract function getApplyBoard($link);
         abstract function getArticleList($boardname,$link);
     }
@@ -47,6 +48,11 @@
         function addBoard($boardname,$boarddetail)
         {
             echo "<script>addBoard('$boardname','$boarddetail');</script>";
+        }
+        //請求看板
+        function applyBoard($boardname,$boarddetail)
+        {
+            echo "<script>applyBoard('$boardname','$boarddetail');</script>";
         }
         //讀取看板請求
         function getApplyBoard($link)

@@ -168,7 +168,15 @@ function addBoard(boardname,boarddetail)
 {
     var board={"detail":boarddetail};
     firestore.collection("board").doc(boardname).set(board).then(function(){
-        exception("新增成功","article.html");
+        exception("新增成功","article.php");
+    });
+}
+//請求看板
+function applyBoard(boardname,boarddetail)
+{
+    var board={"detail":boarddetail};
+    firestore.collection("applyboard").doc(boardname).set(board).then(function(){
+        exception("請求成功","article.php");
     });
 }
 //顯示看板請求按鈕
@@ -203,7 +211,7 @@ function writeApplyBoard(json,id)
     {
         var name=applyBoard[i].name;
         var detail=applyBoard[i].detail;
-        div.innerHTML+=name+":"+detail;
+        div.innerHTML+=name+":"+detail+"<br>";
     }
 }
 //讀取文章
