@@ -4,5 +4,18 @@
     $password=$_POST["password"];
     //資料庫
     $dao=new Firebase();
-    $dao->login($username,$password);
+    //登入成功回傳會員資料
+    if($_GET["username"]!=null)
+    {
+        $_SESSION["username"]=$_GET["username"];
+        $_SESSION["permission"]=$_GET["permission"];
+    }
+    //沒登入
+    if($_SESSION["username"]==null)
+    {
+        $dao->login($username,$password);
+        exit();
+    }
+    //登入完成轉址
+    header("Location:member.php");
 ?>

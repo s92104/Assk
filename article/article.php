@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+    session_start();
+    $permission=$_SESSION["permission"];
+    include("../Dao.php");
+?>
 <head>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/article.css">
@@ -6,11 +11,16 @@
 <html>
     <body>
         <div class="page">
-            <div class="board">
+            <div class="board" id="board">
                 <div class="boardcontent">
                     <iframe src="board.php" width="100%" height="100%" frameborder="0" name="board"></iframe>
                 </div>
                 <a href="applyBoard.html">申請看板</a>
+                <!-- 管理員 -->
+                <?php
+                    if($permission=="admin")
+                        echo "<script>showApplyBoardList('board')</script>";
+                ?>
             </div>
             <div class="article">
                 <div class="menu">

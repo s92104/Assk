@@ -1,9 +1,5 @@
 <?php
     session_start();
-    include("../Dao.php");
-    //登入成功回傳username
-    if($_GET["username"]!=null)
-        $_SESSION["username"]=$_GET["username"];
     //沒登入
     if($_SESSION["username"]==null)
         header('Location: login.html');

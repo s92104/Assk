@@ -33,8 +33,9 @@ function register(json)
     var phone=member.phone;
     var address=member.address;
     var image=member.image;
-    //包成JSON
-    var member={"password":password,"name":name,"email":email,"phone":phone,"address":address,"image":image};
+    var permission=member.permission;
+    //包成Object
+    var member={"password":password,"name":name,"email":email,"phone":phone,"address":address,"image":image,"permission":permission};
 
     var docRef = firestore.collection("user").doc(username);
     docRef.get().then(function(doc){
@@ -57,7 +58,11 @@ function login(username,password)
         {
             //比對密碼
             if(doc.data().password==password)
-                exception("登入成功","member.php?username="+username);
+            {
+                var data=doc.data();
+                var permission=data.permission;
+                exception("登入成功","login.php?username="+username+"&permission="+permission);
+            }
             else
                 exception("密碼錯誤","login.html");
         }
@@ -165,6 +170,41 @@ function addBoard(boardname,boarddetail)
     firestore.collection("board").doc(boardname).set(board).then(function(){
         exception("新增成功","article.html");
     });
+}
+//顯示看板請求按鈕
+function showApplyBoardList(id)
+{
+    var div=document.getElementById(id);
+    var a=document.createElement("a");
+    a.textContent="看板請求";
+    a.href="applyBoardList.php";
+    a.target="article";
+    div.appendChild(a);
+}
+//讀取看板請求
+function getApplyBoard(link)
+{
+    var applyBoard=[];
+    firestore.collection("applyboard").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            var board={"name":doc.id,"detail":doc.data().detail};
+            applyBoard.push(board);
+        });
+        var json=JSON.stringify(applyBoard);
+        location.href=link+"?applyboard="+json;
+    });
+}
+//寫入看板請求
+function writeApplyBoard(json,id)
+{
+    var div=document.getElementById(id);
+    var applyBoard=JSON.parse(json);
+    for(var i=0;i<applyBoard.length;i++)
+    {
+        var name=applyBoard[i].name;
+        var detail=applyBoard[i].detail;
+        div.innerHTML+=name+":"+detail;
+    }
 }
 //讀取文章
 function getArticleList(boardname,link)

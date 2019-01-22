@@ -9,6 +9,7 @@
     }
     $json=$_GET["board"];
 ?>
+<!DOCTYPE html>
 <head>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/board.css">
