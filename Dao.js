@@ -21,6 +21,7 @@ function exception(message,link)
     alert(message);
     location.href=link;
 }
+
 //註冊
 function register(json)
 {
@@ -38,15 +39,11 @@ function register(json)
     var docRef = firestore.collection("user").doc(username);
     docRef.get().then(function(doc){
         if(doc.exists)
-        {
-            alert("帳號已存在");
-            location.href="register.html";
-        }
+            exception("帳號已存在","register.html");
         else
         {
             firestore.collection("user").doc(username).set(member).then(function(){
-                alert("註冊成功");
-                location.href="login.html"; 
+                exception("註冊成功","login.html");
             });  
         }
     });
@@ -60,21 +57,12 @@ function login(username,password)
         {
             //比對密碼
             if(doc.data().password==password)
-            {
-                alert("登入成功");
-                location.href="member.php?username="+username;
-            }
+                exception("登入成功","member.php?username="+username);
             else
-            {
-                alert("密碼錯誤");
-                location.href="login.html";
-            }
+                exception("密碼錯誤","login.html");
         }
         else
-        {
-            alert("帳號不存在");
-            location.href="login.html";
-        }   
+            exception("帳號不存在","login.html");
     });
 }
 //會員資料
@@ -169,4 +157,36 @@ function writeBoard(json,id)
         li.appendChild(a);
         ul.appendChild(li);
     }
+}
+//新增看板
+function addBoard(boardname,boarddetail)
+{
+    var board={"detail":boarddetail};
+    firestore.collection("board").doc(boardname).set(board).then(function(){
+        exception("新增成功","article.html");
+    });
+}
+//讀取文章
+function getArticle(boardname,link)
+{
+    firestore.collection("board").doc(boardname).get().then(function(doc){
+        var data=doc.data();
+        var detail=data.detail;
+        var article={"name":boardname,"detail":detail};
+        var json=JSON.stringify(article);
+
+        location.href=link+"?article="+json;
+    });
+}
+//寫入文章
+function writeArticle(json,id)
+{
+    if(json=="")
+        return;
+    var article=JSON.parse(json);
+    var name=article.name;
+    var detail=article.detail;
+    
+    var div=document.getElementById(id);
+    div.innerHTML=name+"<br>"+detail;
 }

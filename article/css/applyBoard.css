@@ -1,0 +1,25 @@
+.title
+{
+    font-size: 50px;
+    text-align: center;
+}
+.form
+{
+    margin-top: 20px;
+}
+form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+#boardname
+{
+    width: 200px;
+}
+#boarddetail
+{
+    width: 500px;
+    height: 200px; 
+}

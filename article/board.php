@@ -14,6 +14,5 @@
     <link rel="stylesheet" href="css/board.css">
 </head>
 <ul id="board" >
-    <!-- writeBoard -->
+    <script>writeBoard('<?=$json?>',"board");</script>
 </ul>
-<script>writeBoard('<?=$json?>',"board");</script>
