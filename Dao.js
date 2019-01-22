@@ -152,7 +152,7 @@ function writeBoard(json,id)
         var li=document.createElement("li");
         var a=document.createElement("a");
         a.textContent=board[i];
-        a.href="article.php?board="+board[i];
+        a.href="articleList.php?board="+board[i];
         a.target="article";
         li.appendChild(a);
         ul.appendChild(li);
@@ -167,26 +167,50 @@ function addBoard(boardname,boarddetail)
     });
 }
 //讀取文章
-function getArticle(boardname,link)
+function getArticleList(boardname,link)
 {
-    firestore.collection("board").doc(boardname).get().then(function(doc){
-        var data=doc.data();
-        var detail=data.detail;
-        var article={"name":boardname,"detail":detail};
-        var json=JSON.stringify(article);
+    if(boardname=="hot")
+    {
+        
+    }
+    else if(boardname=="all")
+    {
+        firestore.collection("article").get().then(function(querySnapshot){
+            var articleList=[];
 
-        location.href=link+"?article="+json;
-    });
+             querySnapshot.forEach(function(doc){
+                var data=doc.data();
+                var name=data.name;
+                articleList.push(name);
+            });
+            var json=JSON.stringify(articleList);
+    
+            location.href=link+"?articleList="+json;
+        });
+    }
+    else
+    {
+        firestore.collection("article").where("board","==",boardname).get().then(function(querySnapshot){
+            var articleList=[];
+            querySnapshot.forEach(function(doc){
+                var data=doc.data();
+                var name=data.name;
+                articleList.push(name);
+            });
+            var json=JSON.stringify(articleList);
+    
+            location.href=link+"?articleList="+json;
+        });
+    }  
 }
 //寫入文章
-function writeArticle(json,id)
+function writeArticleList(json,id)
 {
-    if(json=="")
-        return;
-    var article=JSON.parse(json);
-    var name=article.name;
-    var detail=article.detail;
-    
     var div=document.getElementById(id);
-    div.innerHTML=name+"<br>"+detail;
+    var articleList=JSON.parse(json);   
+    for(var i=0;i<articleList.length;i++)
+    {
+        var name=articleList[i];
+        div.innerHTML+=name+"<br>";
+    }
 }

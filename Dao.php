@@ -12,7 +12,7 @@
         abstract function editMember($username,$json);
         abstract function getBoard($link,$id);
         abstract function addBoard($boardname,$boarddetail);
-        abstract function getArticle($boardname,$link);
+        abstract function getArticleList($boardname,$link);
     }
 
     class Firebase extends Dao
@@ -48,9 +48,9 @@
             echo "<script>addBoard('$boardname','$boarddetail');</script>";
         }
         //讀取文章
-        function getArticle($boardname,$link)
+        function getArticleList($boardname,$link)
         {
-            echo "<script>getArticle('$boardname','$link');</script>";
+            echo "<script>getArticleList('$boardname','$link');</script>";
         }
     }
 ?>
