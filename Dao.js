@@ -81,8 +81,9 @@ function getMember(username,link)
         var phone=data.phone;
         var address=data.address;
         var image=escape(data.image);
+        var permission=data.permission;
         //包成JSON
-        var member={"password":password,"name":name,"email":email,"phone":phone,"address":address,"image":image};
+        var member={"password":password,"name":name,"email":email,"phone":phone,"address":address,"image":image,"permission":permission};
         var json=JSON.stringify(member);
         location.href=link+"?member="+json;
     });

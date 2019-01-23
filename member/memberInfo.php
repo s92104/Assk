@@ -19,6 +19,7 @@
     $phone=$member->phone;
     $address=$member->address;
     $image=$member->image;
+    $permission=$member->permission;
     if($image!="")
         $image=$member->image;
     else
@@ -40,6 +41,10 @@
                     <tr>
                         <td>密碼</td>
                         <td><?=$password?></td>
+                    </tr>
+                    <tr>
+                        <td>權限</td>
+                        <td><?=$permission?></td>
                     </tr>
                     <tr>
                         <td>暱稱</td>
