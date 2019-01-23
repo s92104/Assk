@@ -2,7 +2,7 @@
     session_start();
     //有登入
     include("../Dao.php");    
-    $dao=new Firebase();
+    $dao=initDao();
     $username=$_SESSION["username"];
     //讀取會員資料
     if($_GET["member"]==null)

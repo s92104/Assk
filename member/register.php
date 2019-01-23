@@ -20,6 +20,6 @@
     $member=array("username"=>$username,"password"=>$password,"name"=>$name,"email"=>$email,"phone"=>$phone,"address"=>$address,"image"=>$image,"permission"=>$permission);
     $json=json_encode($member);
     //資料庫   
-    $dao=new Firebase();
+    $dao=initDao();
     $dao->register($json);
 ?>

@@ -4,6 +4,12 @@
 <script src="../Dao.js"></script>
 <?php
     session_start();
+    //初始化
+    function initDao()
+    {
+        return new Firebase();
+    }
+
     abstract class Dao
     {
         abstract function register($json);        
@@ -11,9 +17,10 @@
         abstract function getMember($username,$link);
         abstract function editMember($username,$json);
         abstract function getBoard($link,$id);
-        abstract function addBoard($boardname,$boarddetail);
-        abstract function applyBoard($boardname,$boarddetail);
+        abstract function addBoard($json);
+        abstract function applyBoard($json);
         abstract function getApplyBoard($link);
+        abstract function deleteApplyBoard($boardname);
         abstract function getArticleList($boardname,$link);
     }
 
@@ -45,19 +52,24 @@
             echo "<script>getBoard('$link','$id');</script>";
         }
         //新增看板
-        function addBoard($boardname,$boarddetail)
+        function addBoard($json)
         {
-            echo "<script>addBoard('$boardname','$boarddetail');</script>";
+            echo "<script>addBoard('$json');</script>";
         }
         //請求看板
-        function applyBoard($boardname,$boarddetail)
+        function applyBoard($json)
         {
-            echo "<script>applyBoard('$boardname','$boarddetail');</script>";
+            echo "<script>applyBoard('$json');</script>";
         }
         //讀取看板請求
         function getApplyBoard($link)
         {
             echo "<script>getApplyBoard('$link');</script>";
+        }
+        //刪除看板請求
+        function deleteApplyBoard($boardname)
+        {
+            echo "<script>deleteApplyBoard('$boardname');</script>";
         }
         //讀取文章
         function getArticleList($boardname,$link)

@@ -1,6 +1,6 @@
 <?php
     include("../Dao.php");
-    $dao=new Firebase();
+    $dao=initDao();
     $applyBoard=$_GET["applyboard"];
     if($applyBoard==null)
     {
@@ -8,5 +8,11 @@
         exit();
     }
 ?>
-<div id="id"></div>
-<script>writeApplyBoard('<?=$applyBoard?>',"id");</script>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/applyBoardList.css">
+</head>
+<div class="applyboard" id="applyboard">
+
+</div>
+<script>writeApplyBoard('<?=$applyBoard?>',"applyboard");</script>

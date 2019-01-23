@@ -2,7 +2,7 @@
     $boardname=$_GET["board"];
 
     include("../Dao.php");
-    $dao=new Firebase();
+    $dao=initDao();
     $json=$_GET["articleList"];
     if($json==null)
     {

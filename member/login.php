@@ -3,7 +3,7 @@
     $username=$_POST["username"];
     $password=$_POST["password"];
     //資料庫
-    $dao=new Firebase();
+    $dao=initDao();
     //登入成功回傳會員資料
     if($_GET["username"]!=null)
     {

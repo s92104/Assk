@@ -22,6 +22,6 @@
     $member=array("password"=>$password,"name"=>$name,"email"=>$email,"phone"=>$phone,"address"=>$address,"image"=>$image);
     $json=json_encode($member);
     //資料庫   
-    $dao=new Firebase();
+    $dao=initDao();
     $dao->editMember($username,$json);
 ?>

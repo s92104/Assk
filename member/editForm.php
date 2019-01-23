@@ -3,7 +3,7 @@
     $username=$_SESSION["username"];
     //資料庫
     include("../Dao.php");
-    $dao=new Firebase();
+    $dao=initDao();
     if($_GET["member"]==null)
     {
         $dao->getMember($username,"editForm.php");

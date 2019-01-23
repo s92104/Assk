@@ -1,6 +1,6 @@
 <?php
     include("../Dao.php");
-    $dao=new Firebase();
+    $dao=initDao();
     //讀取看板
     if($_GET["board"]==null)
     {

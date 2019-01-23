@@ -164,17 +164,47 @@ function writeBoard(json,id)
     }
 }
 //新增看板
-function addBoard(boardname,boarddetail)
+function addBoard(json)
 {
-    var board={"detail":boarddetail};
+    var applyBoard=JSON.parse(json);
+    var username=applyBoard["username"];
+    var permission=applyBoard["permission"];
+    var boardname=applyBoard["boardname"];
+    var boarddetail=applyBoard["boarddetail"];
+    //版主資料
+    var mod=[];
+    if(permission=="user")
+    {
+        mod.push(username);
+    }
+    var board={"moderator":mod,"detail":boarddetail,"announcement":""};
+
     firestore.collection("board").doc(boardname).set(board).then(function(){
-        exception("新增成功","article.php");
+        //刷新Board
+        parent.board.location.href="board.php";
+        firestore.collection("applyboard").doc(boardname).delete().then(function(){
+            //給版主
+            if(permission=="user")
+            {
+                firestore.collection("user").doc(username).update({"permission":boardname}).then(function(){
+                    exception("新增成功","applyBoardList.php");
+                });
+            }
+            else
+                exception("新增成功","applyBoardList.php");
+        });   
     });
 }
 //請求看板
-function applyBoard(boardname,boarddetail)
+function applyBoard(json)
 {
-    var board={"detail":boarddetail};
+    var applyBoard=JSON.parse(json);
+    var username=applyBoard.username;
+    var permission=applyBoard.permission;
+    var boardname=applyBoard.boardname;
+    var boarddetail=applyBoard.boarddetail;
+
+    var board={"username":username,"permission":permission,"detail":boarddetail};
     firestore.collection("applyboard").doc(boardname).set(board).then(function(){
         exception("請求成功","article.php");
     });
@@ -195,11 +225,23 @@ function getApplyBoard(link)
     var applyBoard=[];
     firestore.collection("applyboard").get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
-            var board={"name":doc.id,"detail":doc.data().detail};
+            var data=doc.data();
+            var username=data.username;
+            var permission=data.permission;
+            var boardname=doc.id;
+            var boarddetail=data.detail;
+            var board={"username":username,"permission":permission,"boardname":boardname,"boarddetail":boarddetail};
             applyBoard.push(board);
         });
         var json=JSON.stringify(applyBoard);
         location.href=link+"?applyboard="+json;
+    });
+}
+//刪除看板請求
+function deleteApplyBoard(boardname)
+{
+    firestore.collection("applyboard").doc(boardname).delete().then(function(){
+        exception("刪除成功","applyBoardList.php");
     });
 }
 //寫入看板請求
@@ -209,9 +251,37 @@ function writeApplyBoard(json,id)
     var applyBoard=JSON.parse(json);
     for(var i=0;i<applyBoard.length;i++)
     {
-        var name=applyBoard[i].name;
-        var detail=applyBoard[i].detail;
-        div.innerHTML+=name+":"+detail+"<br>";
+        var boardname=applyBoard[i].boardname;
+        var boarddetail=applyBoard[i].boarddetail;
+        var board=JSON.stringify(applyBoard[i]);
+
+        //boardname
+        var name=document.createElement("div");
+        name.className="boardname";
+        //content
+        var content=document.createElement("div");
+        content.className="content";
+        content.textContent=boardname;
+        name.appendChild(content);
+        //add
+        var add=document.createElement("a");
+        add.className="add";
+        add.textContent="新增";
+        add.href="addBoard.php?board="+board;
+        name.appendChild(add);
+        //delete
+        var del=document.createElement("a");
+        del.className="delete";
+        del.textContent="刪除";
+        del.href="deleteApplyBoard.php?boardname="+boardname;
+        name.appendChild(del);
+        div.appendChild(name);
+        //boarddetail
+        var detail=document.createElement("textarea");
+        detail.className="boarddetail";
+        detail.disabled="disable";
+        detail.textContent=boarddetail.replace(/<br>/g,"\n");
+        div.appendChild(detail);
     }
 }
 //讀取文章
