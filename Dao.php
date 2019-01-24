@@ -22,6 +22,7 @@
         abstract function getApplyBoard($link);
         abstract function deleteApplyBoard($boardname);
         abstract function postArticle($json);
+        abstract function getArticle($docId,$link);
         abstract function getArticleList($boardname,$link);
     }
 
@@ -76,6 +77,11 @@
         function postArticle($json)
         {
             echo "<script>postArticle('$json');</script>";
+        }
+        //讀取文章
+        function getArticle($docId,$link)
+        {
+            echo "<script>getArticle('$docId','$link');</script>";
         }
         //讀取文章
         function getArticleList($boardname,$link)

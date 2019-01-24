@@ -308,6 +308,23 @@ function postArticle(json)
     });
 }
 //讀取文章
+function getArticle(docId,link)
+{
+    firestore.collection("article").doc(docId).get().then(function(doc){
+        var data=doc.data();
+        var username=data.username;
+        var name=data.name;
+        var content=data.content;
+        var click=data.click;
+        var article={"username":username,"name":name,"content":content};
+        var json=JSON.stringify(article);
+
+        firestore.collection("article").doc(docId).update({"click":click+1}).then(function(){
+            location.href=link+"?article="+json;
+        });
+    });
+}
+//讀取文章
 function getArticleList(boardname,link)
 {
     if(boardname=="hot")
@@ -322,7 +339,8 @@ function getArticleList(boardname,link)
              querySnapshot.forEach(function(doc){
                 var data=doc.data();
                 var name=data.name;
-                articleList.push(name);
+                var docId=doc.id;
+                articleList.push({"name":name,"docid":docId});
             });
             var json=JSON.stringify(articleList);
     
@@ -336,7 +354,8 @@ function getArticleList(boardname,link)
             querySnapshot.forEach(function(doc){
                 var data=doc.data();
                 var name=data.name;
-                articleList.push(name);
+                var docId=doc.id;
+                articleList.push({"name":name,"docid":docId});
             });
             var json=JSON.stringify(articleList);
     
@@ -351,7 +370,12 @@ function writeArticleList(json,id)
     var articleList=JSON.parse(json);   
     for(var i=0;i<articleList.length;i++)
     {
-        var name=articleList[i];
-        div.innerHTML+=name+"<br>";
+        var name=articleList[i].name;
+        var docId=articleList[i].docid;
+
+        var a=document.createElement("a");
+        a.href="articleContent.php?docid="+docId;
+        a.textContent=name;
+        div.appendChild(a);
     }
 }
