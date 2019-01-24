@@ -312,11 +312,11 @@ function getArticle(docId,link)
 {
     firestore.collection("article").doc(docId).get().then(function(doc){
         var data=doc.data();
-        var username=data.username;
+        var author=data.author;
         var name=data.name;
         var content=data.content;
         var click=data.click;
-        var article={"username":username,"name":name,"content":content};
+        var article={"author":author,"name":name,"content":content};
         var json=JSON.stringify(article);
 
         firestore.collection("article").doc(docId).update({"click":click+1}).then(function(){
