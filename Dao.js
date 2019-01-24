@@ -18,8 +18,15 @@ firestore.settings({
 //警告+轉址
 function exception(message,link)
 {
-    alert(message);
+    if(message!="")
+        alert(message);
     location.href=link;
+}
+function exception_parent(message,link)
+{
+    if(message!="")
+        alert(message);
+    parent.location.href=link;
 }
 
 //註冊
@@ -302,7 +309,6 @@ function writeSelectBoard(json,id)
 function postArticle(json)
 {
     var article=JSON.parse(json);
-    
     firestore.collection("article").add(article).then(function(){
         exception("發文成功","articleList.php?board="+article.board);
     });
@@ -312,11 +318,23 @@ function getArticleList(boardname,link)
 {
     if(boardname=="hot")
     {
-        
+        firestore.collection("article").orderBy("click","desc").get().then(function(querySnapshot){
+            var articleList=[];
+
+             querySnapshot.forEach(function(doc){
+                var data=doc.data();
+                var name=data.name;
+                var docId=doc.id;
+                articleList.push({"name":name,"docid":docId});
+            });
+            var json=JSON.stringify(articleList);
+    
+            location.href=link+"?articleList="+json;
+        });
     }
     else if(boardname=="all")
     {
-        firestore.collection("article").get().then(function(querySnapshot){
+        firestore.collection("article").orderBy("time","desc").get().then(function(querySnapshot){
             var articleList=[];
 
              querySnapshot.forEach(function(doc){
@@ -332,7 +350,7 @@ function getArticleList(boardname,link)
     }
     else
     {
-        firestore.collection("article").where("board","==",boardname).get().then(function(querySnapshot){
+        firestore.collection("article").where("board","==",boardname).orderBy("time","desc").get().then(function(querySnapshot){
             var articleList=[];
             querySnapshot.forEach(function(doc){
                 var data=doc.data();
@@ -371,7 +389,8 @@ function getArticle(docId,link)
         var name=data.name;
         var content=data.content;
         var click=data.click;
-        var article={"author":author,"name":name,"content":content};
+        var time=data.time;
+        var article={"author":author,"name":name,"content":content,"time":time};
         var json=JSON.stringify(article);
 
         firestore.collection("article").doc(docId).update({"click":click+1}).then(function(){
@@ -386,7 +405,22 @@ function writeArticle(json,id)
     var author=article.author;
     var name=article.name;
     var content=article.content;
-    
+    //timestamp轉date
+    var time=new Date(article.time*1000);
+    //取得時間資料
+    var year=time.getFullYear();
+    var month=time.getMonth()+1;
+    var date=time.getDate();
+    var hour=time.getHours();
+    if(hour<10)
+        hour="0"+hour;
+    var minute=time.getMinutes();
+    if(minute<10)
+        minute="0"+minute;
+    var second=time.getSeconds();
+    if(second<10)
+        second="0"+second;
+
     //div
     var div=document.getElementById(id);
     //author
@@ -397,6 +431,10 @@ function writeArticle(json,id)
     var nameDiv=document.createElement("div");
     nameDiv.textContent="標題:"+name;
     div.appendChild(nameDiv);
+    //time
+    var timeDiv=document.createElement("div");
+    timeDiv.textContent="時間:"+year+"/"+month+"/"+date+" "+hour+":"+minute+":"+second;
+    div.appendChild(timeDiv);
     //content
     var contentTextarea=document.createElement("textarea");
     contentTextarea.textContent=content.replace(/<br>/g,"\n");

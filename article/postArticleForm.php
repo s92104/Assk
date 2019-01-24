@@ -1,7 +1,13 @@
 <?php
+    session_start();
     include("../Dao.php");
-    $dao=initDao();
+    if($_SESSION["username"]==null)
+    {
+        echo "<script>exception_parent('','../member/login.html');</script>";
+        exit();
+    }
 
+    $dao=initDao();
    if($_GET["board"]==null)
     {
         $dao->getBoard("postArticleForm.php");

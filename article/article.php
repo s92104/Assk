@@ -15,7 +15,7 @@
                 <div class="boardcontent">
                     <iframe src="board.php" width="100%" height="100%" frameborder="0" name="board"></iframe>
                 </div>
-                <a href="applyBoard.html">申請看板</a>
+                <a href="applyBoardForm.php">申請看板</a>
                 <!-- 管理員 -->
                 <?php
                     if($permission=="admin")

@@ -86,7 +86,7 @@
          //讀取文章
          function getArticle($docId,$link)
          {
-             echo "<script>getArticle('$docId','$link');</script>";
+            echo "<script>getArticle('$docId','$link');</script>";
          }       
     }
 ?>
