@@ -136,7 +136,7 @@ function uploadFile(username,fileId,imageId,progressId,inputId)
     }); 
 }
 //讀取看板
-function getBoard(link,id)
+function getBoard(link)
 {
     var board=[];
 
@@ -284,6 +284,28 @@ function writeApplyBoard(json,id)
         detail.textContent=boarddetail.replace(/<br>/g,"\n");
         div.appendChild(detail);
     }
+}
+//寫入選擇看板
+function writeSelectBoard(json,id)
+{
+    var board=JSON.parse(json);
+    var select=document.getElementById(id);
+    for(var i=0;i<board.length;i++)
+    {
+        var option=document.createElement("option");
+        option.value=board[i];
+        option.textContent=board[i];
+        select.appendChild(option);
+    }
+}
+//發文
+function postArticle(json)
+{
+    var article=JSON.parse(json);
+    
+    firestore.collection("article").add(article).then(function(){
+        exception("發文成功","articleList.php?board="+article.board);
+    });
 }
 //讀取文章
 function getArticleList(boardname,link)

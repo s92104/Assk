@@ -16,11 +16,12 @@
         abstract function login($username,$password);
         abstract function getMember($username,$link);
         abstract function editMember($username,$json);
-        abstract function getBoard($link,$id);
+        abstract function getBoard($link);
         abstract function addBoard($json);
         abstract function applyBoard($json);
         abstract function getApplyBoard($link);
         abstract function deleteApplyBoard($boardname);
+        abstract function postArticle($json);
         abstract function getArticleList($boardname,$link);
     }
 
@@ -47,9 +48,9 @@
             echo "<script>editMember('$username','$json');</script>";
         }
         //讀取看板
-        function getBoard($link,$id)
+        function getBoard($link)
         {
-            echo "<script>getBoard('$link','$id');</script>";
+            echo "<script>getBoard('$link');</script>";
         }
         //新增看板
         function addBoard($json)
@@ -70,6 +71,11 @@
         function deleteApplyBoard($boardname)
         {
             echo "<script>deleteApplyBoard('$boardname');</script>";
+        }
+        //發文
+        function postArticle($json)
+        {
+            echo "<script>postArticle('$json');</script>";
         }
         //讀取文章
         function getArticleList($boardname,$link)

@@ -4,7 +4,7 @@
     //讀取看板
     if($_GET["board"]==null)
     {
-        $dao->getBoard("board.php","board");
+        $dao->getBoard("board.php");
         exit();
     }
     $json=$_GET["board"];

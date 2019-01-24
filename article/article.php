@@ -27,7 +27,7 @@
                     <a href="articleList.php?board=hot" target="article">熱門</a>
                     <a href="articleList.php?board=all" target="article">全部</a>
                     <a href="articleList.php?board=trace" target="article">追蹤</a>
-                    <a href="postArticle.html" target="article" id="post">發文</a>
+                    <a href="postArticleForm.php" target="article" id="post">發文</a>
                 </div>
                 <div class="articlecontent">
                     <iframe src="articleList.php?board=hot" width="100%" height="100%" frameborder="0" name="article">article</iframe>
