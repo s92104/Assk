@@ -308,23 +308,6 @@ function postArticle(json)
     });
 }
 //讀取文章
-function getArticle(docId,link)
-{
-    firestore.collection("article").doc(docId).get().then(function(doc){
-        var data=doc.data();
-        var author=data.author;
-        var name=data.name;
-        var content=data.content;
-        var click=data.click;
-        var article={"author":author,"name":name,"content":content};
-        var json=JSON.stringify(article);
-
-        firestore.collection("article").doc(docId).update({"click":click+1}).then(function(){
-            location.href=link+"?article="+json;
-        });
-    });
-}
-//讀取文章
 function getArticleList(boardname,link)
 {
     if(boardname=="hot")
@@ -378,4 +361,45 @@ function writeArticleList(json,id)
         a.textContent=name;
         div.appendChild(a);
     }
+}
+//讀取文章
+function getArticle(docId,link)
+{
+    firestore.collection("article").doc(docId).get().then(function(doc){
+        var data=doc.data();
+        var author=data.author;
+        var name=data.name;
+        var content=data.content;
+        var click=data.click;
+        var article={"author":author,"name":name,"content":content};
+        var json=JSON.stringify(article);
+
+        firestore.collection("article").doc(docId).update({"click":click+1}).then(function(){
+            location.href=link+"?article="+json;
+        });
+    });
+}
+//寫入文章
+function writeArticle(json,id)
+{
+    var article=JSON.parse(json);
+    var author=article.author;
+    var name=article.name;
+    var content=article.content;
+    
+    //div
+    var div=document.getElementById(id);
+    //author
+    var authorDiv=document.createElement("div");
+    authorDiv.textContent="作者:"+author;
+    div.appendChild(authorDiv);
+    //name
+    var nameDiv=document.createElement("div");
+    nameDiv.textContent="標題:"+name;
+    div.appendChild(nameDiv);
+    //content
+    var contentTextarea=document.createElement("textarea");
+    contentTextarea.textContent=content.replace(/<br>/g,"\n");
+    contentTextarea.disabled="disable";
+    div.appendChild(contentTextarea);
 }

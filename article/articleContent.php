@@ -9,9 +9,11 @@
         exit();
     }
     $json=$_GET["article"];
-    $article=json_decode($json);
-    $author=$article->author;
-    $name=$article->name;
-    $content=$article->content;
-    echo "作者:".$author."<br>文章名稱:".$name."<br>文章內容".$content;
 ?>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/articleContent.css">
+</head>
+<div id="articleContent">
+    <script>writeArticle('<?=$json?>','articleContent')</script>
+</div>

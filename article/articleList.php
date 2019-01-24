@@ -10,6 +10,10 @@
         exit();
     }
 ?>
-<div id="a">
-    <script>writeArticleList('<?=$json?>',"a");</script>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/articleList.css">
+</head>
+<div id="articlelist">
+    <script>writeArticleList('<?=$json?>',"articlelist");</script>
 </div>
