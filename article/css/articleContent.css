@@ -4,9 +4,8 @@
     flex-direction: column;
     height: 100%;
 }
-textarea
+.content
 {
     height: 100%;
-    background: white;
-    color: black;
+    border: 1px solid black;
 }

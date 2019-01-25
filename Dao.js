@@ -285,10 +285,9 @@ function writeApplyBoard(json,id)
         name.appendChild(del);
         div.appendChild(name);
         //boarddetail
-        var detail=document.createElement("textarea");
+        var detail=document.createElement("div");
         detail.className="boarddetail";
-        detail.disabled="disable";
-        detail.textContent=boarddetail.replace(/<br>/g,"\n");
+        detail.innerHTML=boarddetail
         div.appendChild(detail);
     }
 }
@@ -436,8 +435,8 @@ function writeArticle(json,id)
     timeDiv.textContent="時間:"+year+"/"+month+"/"+date+" "+hour+":"+minute+":"+second;
     div.appendChild(timeDiv);
     //content
-    var contentTextarea=document.createElement("textarea");
-    contentTextarea.textContent=content.replace(/<br>/g,"\n");
-    contentTextarea.disabled="disable";
-    div.appendChild(contentTextarea);
+    var contentDiv=document.createElement("div");
+    contentDiv.className="content";
+    contentDiv.innerHTML=content;
+    div.appendChild(contentDiv);
 }
