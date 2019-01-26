@@ -3,7 +3,6 @@
 <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-storage.js"></script>
 <script src="../Dao.js"></script>
 <?php
-    session_start();
     //初始化
     function initDao()
     {
