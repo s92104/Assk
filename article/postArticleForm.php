@@ -3,10 +3,10 @@
     include("../Dao.php");
     if($_SESSION["username"]==null)
     {
-        echo "<script>exception_parent('','../member/login.html');</script>";
+        transferParent("../member/login.html");
         exit();
     }
-
+    
     $dao=initDao();
    if($_GET["board"]==null)
     {

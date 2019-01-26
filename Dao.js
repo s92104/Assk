@@ -18,21 +18,24 @@ firestore.settings({
 //警告+轉址
 function exception(message,link)
 {
-    if(message!="")
-        alert(message);
+    alert(message);
     location.href=link;
 }
-function exception_parent(message,link)
+function exceptionParent(message,link)
 {
-    if(message!="")
-        alert(message);
+    alert(message);
+    parent.location.href=link;
+}
+//轉址
+function transferParent(link)
+{
     parent.location.href=link;
 }
 
 //註冊
 function register(json)
 {
-    var member=JSON.parse(json);
+    var member=json;
     var username=member.username;
     var password=member.password;
     var name=member.name;
@@ -98,14 +101,14 @@ function getMember(username,link)
 //修改資料
 function editMember(username,json)
 {
-    var member=JSON.parse(json);
+    var member=json;
     var password=member.password;
     var name=member.name;
     var email=member.email;
     var phone=member.phone;
     var address=member.address;
     var image=member.image;
-    //包成JSON
+    //包成Object
     var member={"password":password,"name":name,"email":email,"phone":phone,"address":address,"image":image};
 
     firestore.collection("user").doc(username).update(member).then(function(){
@@ -174,7 +177,7 @@ function writeBoard(json,id)
 //新增看板
 function addBoard(json)
 {
-    var applyBoard=JSON.parse(json);
+    var applyBoard=json;
     var username=applyBoard["username"];
     var permission=applyBoard["permission"];
     var boardname=applyBoard["boardname"];
@@ -206,7 +209,7 @@ function addBoard(json)
 //請求看板
 function applyBoard(json)
 {
-    var applyBoard=JSON.parse(json);
+    var applyBoard=json;
     var username=applyBoard.username;
     var permission=applyBoard.permission;
     var boardname=applyBoard.boardname;
@@ -218,7 +221,7 @@ function applyBoard(json)
     });
 }
 //顯示看板請求按鈕
-function showApplyBoardList(id)
+function showApplyBoardBtn(id)
 {
     var div=document.getElementById(id);
     var a=document.createElement("a");
@@ -307,7 +310,7 @@ function writeSelectBoard(json,id)
 //發文
 function postArticle(json)
 {
-    var article=JSON.parse(json);
+    var article=json;
     firestore.collection("article").add(article).then(function(){
         exception("發文成功","articleList.php?board="+article.board);
     });

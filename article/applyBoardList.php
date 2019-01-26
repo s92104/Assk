@@ -1,8 +1,8 @@
 <?php
     include("../Dao.php");
     $dao=initDao();
-    $applyBoard=$_GET["applyboard"];
-    if($applyBoard==null)
+    $json=$_GET["applyboard"];
+    if($json==null)
     {
         $dao->getApplyBoard("applyBoardList.php");
         exit();
@@ -15,4 +15,4 @@
 <div class="applyboard" id="applyboard">
 
 </div>
-<script>writeApplyBoard('<?=$applyBoard?>',"applyboard");</script>
+<script>writeApplyBoard('<?=$json?>',"applyboard");</script>
