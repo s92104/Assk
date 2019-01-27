@@ -3,7 +3,7 @@
     include("../Dao.php");
     if($_SESSION["username"]==null)
     {
-        echo "<script>exception('','../member/login.html');</script>";
+        header("Location:../member/login.html");
         exit();
     }
 ?>

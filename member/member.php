@@ -2,7 +2,10 @@
     session_start();
     //沒登入
     if($_SESSION["username"]==null)
+    {
         header('Location: login.html');
+        exit();
+    }
 ?>
 
 <head>

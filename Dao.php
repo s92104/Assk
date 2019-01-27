@@ -3,11 +3,29 @@
 <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-storage.js"></script>
 <script src="../Dao.js"></script>
 <?php
-    session_start();
     //初始化
     function initDao()
     {
         return new Firebase();
+    }
+    //警告+轉址
+    function exception($message,$link)
+    {
+        echo "<script>exception('$message','$link');</script>";
+    }
+    function exceptionParent($message,$link)
+    {
+        echo "<script>exceptionParent('$message','$link');</script>";
+    }
+    //父頁框轉址
+    function transferParent($link)
+    {
+        echo "<script>transferParent('$link');</script>";
+    }
+    //顯示看板請求按鈕
+    function showApplyBoardBtn($id)
+    {
+        echo "<script>showApplyBoardBtn('$id')</script>";
     }
 
     abstract class Dao
@@ -31,7 +49,7 @@
         //註冊
         function register($json)
         {
-            echo "<script>register('$json');</script>";
+            echo "<script>register(".$json.");</script>";
         }
         //登入
         function login($username,$password)
@@ -46,7 +64,7 @@
         //修改資料
         function editMember($username,$json)
         {
-            echo "<script>editMember('$username','$json');</script>";
+            echo "<script>editMember('$username',".$json.");</script>";
         }
         //寫入上傳按鈕
         function writeUploadFile($username)
@@ -61,12 +79,12 @@
         //新增看板
         function addBoard($json)
         {
-            echo "<script>addBoard('$json');</script>";
+            echo "<script>addBoard(".$json.");</script>";
         }
         //請求看板
         function applyBoard($json)
         {
-            echo "<script>applyBoard('$json');</script>";
+            echo "<script>applyBoard(".$json.");</script>";
         }
         //讀取看板請求
         function getApplyBoard($link)
@@ -81,7 +99,7 @@
         //發文
         function postArticle($json)
         {
-            echo "<script>postArticle('$json');</script>";
+            echo "<script>postArticle(".$json.");</script>";
         }
         //讀取文章
         function getArticleList($boardname,$link)

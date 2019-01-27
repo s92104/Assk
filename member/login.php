@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("../Dao.php");
     $username=$_POST["username"];
     $password=$_POST["password"];

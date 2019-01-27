@@ -19,7 +19,7 @@
                 <!-- 管理員 -->
                 <?php
                     if($permission=="admin")
-                        echo "<script>showApplyBoardList('board')</script>";
+                        showApplyBoardBtn("board");
                 ?>
             </div>
             <div class="article">
