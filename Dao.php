@@ -48,6 +48,11 @@
         {
             echo "<script>editMember('$username','$json');</script>";
         }
+        //寫入上傳按鈕
+        function writeUploadFile($username)
+        {
+            echo "uploadFileFirebase('$username','file','image','progress','imageUrl')";
+        }
         //讀取看板
         function getBoard($link)
         {

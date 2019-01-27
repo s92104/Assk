@@ -11,19 +11,8 @@
         exit();
     }
     //解析JSON
-    $json=$_GET["member"];
-    $member=json_decode($json);
-    $password=$member->password;
-    $name=$member->name;
-    $email=$member->email;
-    $phone=$member->phone;
-    $address=$member->address;
-    $image=$member->image;
-    $permission=$member->permission;
-    if($image!="")
-        $image=$member->image;
-    else
-        $image="img/noImage.png";
+    $member=$_GET["member"];
+    $id=json_encode(array("username"=>"username","password"=>"password","permission"=>"permission","name"=>"name","email"=>"email","phone"=>"phone","address"=>"address","image"=>"image"));
 ?>
 <head>
     <meta charset="utf-8"/>
@@ -36,40 +25,41 @@
                 <tbody>
                     <tr>
                         <td>帳號</td>
-                        <td><?=$username?></td>
+                        <td id="username"></td>
                     </tr>
                     <tr>
                         <td>密碼</td>
-                        <td><?=$password?></td>
+                        <td id="password"></td>
                     </tr>
                     <tr>
                         <td>權限</td>
-                        <td><?=$permission?></td>
+                        <td id="permission"></td>
                     </tr>
                     <tr>
                         <td>暱稱</td>
-                        <td><?=$name?></td>
+                        <td id="name"></td>
                     </tr>
                     <tr>
                         <td>電子信箱</td>
-                        <td><?=$email?></td>
+                        <td id="email"></td>
                     </tr> 
                     <tr>
                         <td>電話</td>
-                        <td><?=$phone?></td>
+                        <td id="phone"></td>
                     </tr> <tr>
                         <td>地址</td>
-                        <td><?=$address?></td>
+                        <td id="address"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="head">
             大頭貼
-            <img src="<?=$image?>">
+            <img id="image">
         </div>                
     </body>
 </html>
+<script>writeMember("<?=$username?>",<?=$member?>,<?=$id?>)</script>
 
 
         

@@ -29,6 +29,7 @@ function exception_parent(message,link)
     parent.location.href=link;
 }
 
+//----------Member----------
 //註冊
 function register(json)
 {
@@ -95,6 +96,21 @@ function getMember(username,link)
         location.href=link+"?member="+json;
     });
 }
+//寫入會員資料
+function writeMember(username,member,id)
+{
+    document.getElementById(id.username).textContent=username;
+    document.getElementById(id.password).textContent=member.password;
+    document.getElementById(id.permission).textContent=member.permission;
+    document.getElementById(id.name).textContent=member.name;
+    document.getElementById(id.email).textContent=member.email;
+    document.getElementById(id.phone).textContent=member.phone;
+    document.getElementById(id.address).textContent=member.address;
+    if(member.image!="")
+        document.getElementById(id.image).src=member.image;
+    else
+        document.getElementById(id.image).src="img/noImage.png";
+}
 //修改資料
 function editMember(username,json)
 {
@@ -113,8 +129,23 @@ function editMember(username,json)
         getMember(username,"editForm.php");
     });    
 }
+//寫入修改資料
+function writeEditMember(username,member,id)
+{
+    document.getElementById(id.username).value=username;
+    document.getElementById(id.password).value=member.password;
+    document.getElementById(id.name).value=member.name;
+    document.getElementById(id.email).value=member.email;
+    document.getElementById(id.phone).value=member.phone;
+    document.getElementById(id.address).value=member.address;
+    document.getElementById(id.imageUrl).value=member.image;
+    if(member.image!="")
+        document.getElementById(id.image).src=member.image;
+    else
+        document.getElementById(id.image).src="img/noImage.png";
+}
 //上傳圖片
-function uploadFile(username,fileId,imageId,progressId,inputId)
+function uploadFileFirebase(username,fileId,imageId,progressId,inputId)
 {
     var fileButton=document.getElementById(fileId);
     //獲取檔案
@@ -142,6 +173,7 @@ function uploadFile(username,fileId,imageId,progressId,inputId)
         });
     }); 
 }
+//----------Article----------
 //讀取看板
 function getBoard(link)
 {
@@ -245,13 +277,6 @@ function getApplyBoard(link)
         location.href=link+"?applyboard="+json;
     });
 }
-//刪除看板請求
-function deleteApplyBoard(boardname)
-{
-    firestore.collection("applyboard").doc(boardname).delete().then(function(){
-        exception("刪除成功","applyBoardList.php");
-    });
-}
 //寫入看板請求
 function writeApplyBoard(json,id)
 {
@@ -290,6 +315,13 @@ function writeApplyBoard(json,id)
         detail.innerHTML=boarddetail
         div.appendChild(detail);
     }
+}
+//刪除看板請求
+function deleteApplyBoard(boardname)
+{
+    firestore.collection("applyboard").doc(boardname).delete().then(function(){
+        exception("刪除成功","applyBoardList.php");
+    });
 }
 //寫入選擇看板
 function writeSelectBoard(json,id)
