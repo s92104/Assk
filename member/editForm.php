@@ -43,7 +43,7 @@
             大頭貼<br>
             <img id="image">
             <input type="file" id="file"><br>
-            <button type="button" onclick=<?php $dao->writeUploadFile($username); ?>>上傳</button>
+            <input type="button" onclick=<?php $dao->writeUploadFile($username); ?> value="上傳">
             <progress value="0" max="100" id="progress">0%</progress>
         </div>
     </div>                                

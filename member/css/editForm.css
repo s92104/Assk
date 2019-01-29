@@ -71,6 +71,9 @@ body
 .image input
 {
     margin-bottom: 10px;
+}
+#file
+{
     width: 100%;
 }
 .image progress
