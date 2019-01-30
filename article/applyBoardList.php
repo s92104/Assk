@@ -15,4 +15,4 @@
 <div class="applyboard" id="applyboard">
 
 </div>
-<script>writeApplyBoard('<?=$json?>',"applyboard");</script>
+<script>writeApplyBoard(<?=$json?>,"applyboard");</script>

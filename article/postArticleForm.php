@@ -27,7 +27,7 @@
             看板名稱
         </div>
         <select name="boardname" id="boardname">
-            <script>writeSelectBoard('<?=$json?>','boardname');</script>
+            <script>writeSelectBoard(<?=$json?>,'boardname');</script>
         </select>
         <div class="smalltitle">
             文章名稱

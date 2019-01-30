@@ -193,7 +193,7 @@ function getBoard(link)
 //寫入看板
 function writeBoard(json,id)
 {
-    var board=JSON.parse(json);
+    var board=json;
     var ul=document.getElementById(id);
     for(var i=0;i<board.length;i++)
     {
@@ -284,7 +284,7 @@ function getApplyBoard(link)
 function writeApplyBoard(json,id)
 {
     var div=document.getElementById(id);
-    var applyBoard=JSON.parse(json);
+    var applyBoard=json;
     for(var i=0;i<applyBoard.length;i++)
     {
         var boardname=applyBoard[i].boardname;
@@ -329,7 +329,7 @@ function deleteApplyBoard(boardname)
 //寫入選擇看板
 function writeSelectBoard(json,id)
 {
-    var board=JSON.parse(json);
+    var board=json;
     var select=document.getElementById(id);
     for(var i=0;i<board.length;i++)
     {
@@ -398,11 +398,11 @@ function getArticleList(boardname,link)
         });
     }  
 }
-//寫入文章
+//寫入文章列表
 function writeArticleList(json,id)
 {
     var div=document.getElementById(id);
-    var articleList=JSON.parse(json);   
+    var articleList=json;   
     for(var i=0;i<articleList.length;i++)
     {
         var name=articleList[i].name;
@@ -435,7 +435,7 @@ function getArticle(docId,link)
 //寫入文章
 function writeArticle(json,id)
 {
-    var article=JSON.parse(json);
+    var article=json;
     var author=article.author;
     var name=article.name;
     var content=article.content;
@@ -474,4 +474,227 @@ function writeArticle(json,id)
     contentDiv.className="content";
     contentDiv.innerHTML=content;
     div.appendChild(contentDiv);
+}
+//----------Ask----------
+//寫入時間選項
+function writeTimeOption(dateClass,hourClass,minuteClass)
+{
+    var date=document.getElementsByClassName(dateClass);
+    var hour=document.getElementsByClassName(hourClass);
+    var minute=document.getElementsByClassName(minuteClass);
+    //date
+    for(var i=1;i<8;i++)
+    {
+        var option=document.createElement("option");
+        option.textContent=i;
+        option.value=i;
+        date[0].appendChild(option);
+    }
+    //hour
+    for(var i=0;i<24;i++)
+    {
+        for(var j=0;j<2;j++)
+        {
+            var option=document.createElement("option");
+            option.textContent=i;
+            option.value=i;
+            hour[j].appendChild(option);
+        }
+    }
+    //minute
+    for(var i=0;i<60;i++)
+    {
+        for(var j=0;j<2;j++)
+        {
+            var option=document.createElement("option");
+            option.textContent=i;
+            option.value=i;
+            minute[j].appendChild(option);
+        }
+    }
+}
+//寫入選擇時間
+function addTime(divId,formId,dateClass,hourClass,minuteClass)
+{
+    var form=document.getElementById(formId);
+    var date=document.getElementsByClassName(dateClass);
+    var hour=document.getElementsByClassName(hourClass);
+    var minute=document.getElementsByClassName(minuteClass);
+    // 顯示
+    var div=document.getElementById(divId);
+    var block=document.createElement("div");
+    block.className="block";
+    block.textContent="星期"+date[0].value+" "+hour[0].value+":"+minute[0].value+"~"+hour[1].value+":"+minute[1].value;
+    var button=document.createElement("input");
+    button.type="button";
+    button.value="刪除";
+    // 刪除
+    button.onclick=function(){
+        button.parentNode.parentNode.removeChild(block);
+        hiddenDate.parentNode.removeChild(hiddenDate);
+        hourStart.parentNode.removeChild(hourStart);
+        minuteStart.parentNode.removeChild(minuteStart);
+        hourEnd.parentNode.removeChild(hourEnd);
+        minuteEnd.parentNode.removeChild(minuteEnd);
+    }
+    block.appendChild(button);
+    div.appendChild(block);
+    // 加入隱藏欄位
+    var hiddenDate=document.createElement("input");
+    hiddenDate.type="hidden";
+    hiddenDate.value=date[0].value;
+    hiddenDate.name="date[]";
+    form.appendChild(hiddenDate);
+    // 開始時間
+    var hourStart=document.createElement("input");
+    hourStart.type="hidden";
+    hourStart.value=hour[0].value;
+    hourStart.name="hourStart[]";
+    form.appendChild(hourStart);
+    var minuteStart=document.createElement("input");
+    minuteStart.type="hidden";
+    minuteStart.value=minute[0].value;
+    minuteStart.name="minuteStart[]";
+    form.appendChild(minuteStart);
+    // 結束時間
+    var hourEnd=document.createElement("input");
+    hourEnd.type="hidden";
+    hourEnd.value=hour[1].value;
+    hourEnd.name="hourEnd[]";
+    form.appendChild(hourEnd);
+    var minuteEnd=document.createElement("input");
+    minuteEnd.type="hidden";
+    minuteEnd.value=minute[1].value;
+    minuteEnd.name="minuteEnd[]";
+    form.appendChild(minuteEnd);
+}
+//刊登諮商
+function postAsk(ask)
+{
+    firestore.collection("ask").add(ask).then(function(){
+        location.href="ask.html";
+    });
+}
+//讀取諮商列表
+function getAskList(link)
+{
+    var askList=[];
+    firestore.collection("ask").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            var data=doc.data();
+            var username=data.username;
+            var name=data.name;
+            var detail=data.detail;
+            var docId=doc.id;
+            var ask={"username":username,"name":name,"detail":detail,"docId":docId};
+            askList.push(ask);
+        });
+        var json=JSON.stringify(askList);
+        location.href=link+"?ask="+json;
+    });
+}
+//寫入諮商列表
+function writeAskList(ask,divId)
+{
+    var div=document.getElementById(divId);
+    for(var i=0;i<ask.length;i++)
+    {
+        var username=ask[i].username;
+        var name=ask[i].name;
+        var detail=ask[i].detail;
+        var docId=ask[i].docId;
+        var block=document.createElement("a");
+        block.className="block";
+        block.innerHTML="刊登者:"+username+"<br>名稱:"+name+"<br>詳細:<br>"+detail;
+        block.href="askContent.php?docId="+docId;
+        div.appendChild(block);
+    }
+    
+}
+//讀取諮商
+function getAsk(docId,link)
+{
+    firestore.collection("ask").doc(docId).get().then(function(doc){
+        var data=doc.data();
+        var username=data.username;
+        var name=data.name;
+        var detail=data.detail;
+        var date=data.date;
+        var hourStart=data.hourStart;
+        var minuteStart=data.minuteStart;
+        var hourEnd=data.hourEnd;
+        var minuteEnd=data.minuteEnd;
+        var ask={"docId":docId,"username":username,"name":name,"detail":detail,"date":date,"hourStart":hourStart,"minuteStart":minuteStart,"hourEnd":hourEnd,"minuteEnd":minuteEnd}
+        var json=JSON.stringify(ask);
+        location.href=link+"?ask="+json;
+    });
+}
+//寫入諮商
+function writeAskFirebase(docId,ask,divId)
+{
+    var div=document.getElementById(divId);
+    var username=ask.username;
+    var name=ask.name;
+    var detail=ask.detail;
+    var date=ask.date;
+    var hourStart=ask.hourStart;
+    var minuteStart=ask.minuteStart;
+    var hourEnd=ask.hourEnd;
+    var minuteEnd=ask.minuteEnd;
+
+    // 刊登者
+    var usernameDiv=document.createElement("div");
+    usernameDiv.textContent="刊登者:"+username;
+    usernameDiv.className="username";
+    div.appendChild(usernameDiv);
+    // 名稱
+    var nameDiv=document.createElement("div");
+    nameDiv.textContent="名稱:"+name;
+    nameDiv.className="name";
+    div.appendChild(nameDiv);
+    // 詳細
+    var detailDiv=document.createElement("div");
+    detailDiv.innerHTML=detail;
+    detailDiv.className="detail";
+    div.appendChild(detailDiv);
+    // 時間
+    var timeDiv=document.createElement("div");
+    timeDiv.className="timeBlock";
+    timeDiv.textContent="時間:"
+    for(var i=0;i<date.length;i++)
+    {
+        var time=document.createElement("div")
+        time.className="time";
+        time.textContent="星期"+date[i]+" "+hourStart[i]+":"+minuteStart[i]+"~"+hourEnd[i]+":"+minuteEnd[i];
+        timeDiv.appendChild(time);
+    }
+    div.appendChild(timeDiv);
+    // 已預約
+    var reserveDiv=document.createElement("div");
+    reserveDiv.className="reserveBlock";
+    reserveDiv.innerHTML="已預約:";
+    firestore.collection("reserve").where("docId","==",docId).get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc)
+        {
+            var data=doc.data();
+            var date=data.date;
+            var hourStart=data.hourStart;
+            var minuteStart=data.minuteStart;
+            var hourEnd=data.hourEnd;
+            var minuteEnd=data.minuteEnd;
+            
+            var reserve=document.createElement("div");
+            reserve.className="reserve";
+            reserve.textContent="星期"+date+" "+hourStart+":"+minuteStart+"~"+hourEnd+":"+minuteEnd;
+            reserveDiv.appendChild(reserve);
+        });
+    });
+    div.appendChild(reserveDiv);           
+}
+//預約諮商
+function reserve(docId,ask)
+{
+    firestore.collection("reserve").add(ask).then(function(){
+        location.href="askContent.php?docId="+docId;
+    });
 }

@@ -1,0 +1,28 @@
+*
+{
+    text-decoration: none;
+}
+.ask
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.detail
+{
+    border: 1px solid black;
+}
+.timeBlock
+{
+    margin-top: 20px;
+}
+.reserveBlock
+{
+    margin-top: 20px;
+}
+a
+{
+    font-size: 50px;
+    margin-top: auto;
+    align-self: center;
+}

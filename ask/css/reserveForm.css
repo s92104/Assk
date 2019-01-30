@@ -1,0 +1,17 @@
+#name
+{
+    width: 50%;
+}
+#detail
+{
+    width: 50%;
+    height: 200px;
+}
+.hour
+{
+    margin-left: 20px;
+}
+.date,.hour,.minute
+{
+    margin-top: 20px;
+}

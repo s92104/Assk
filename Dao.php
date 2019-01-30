@@ -34,6 +34,7 @@
         abstract function login($username,$password);
         abstract function getMember($username,$link);
         abstract function editMember($username,$json);
+        abstract function writeUploadFile($username,$file,$image,$progress,$imageUrl);
         abstract function getBoard($link);
         abstract function addBoard($json);
         abstract function applyBoard($json);
@@ -42,6 +43,11 @@
         abstract function postArticle($json);
         abstract function getArticleList($boardname,$link);
         abstract function getArticle($docId,$link);
+        abstract function postAsk($ask);
+        abstract function getAskList($link);
+        abstract function getAsk($docId,$link);
+        abstract function reserve($docId,$ask);
+        abstract function writeAsk($docId,$json,$id);
     }
 
     class Firebase extends Dao
@@ -67,9 +73,9 @@
             echo "<script>editMember('$username',".$json.");</script>";
         }
         //寫入上傳按鈕
-        function writeUploadFile($username)
+        function writeUploadFile($username,$file,$image,$progress,$imageUrl)
         {
-            echo "uploadFileFirebase('$username','file','image','progress','imageUrl')";
+            echo "uploadFileFirebase('$username','$file','$image','$progress','$imageUrl')";
         }
         //讀取看板
         function getBoard($link)
@@ -106,10 +112,35 @@
         {
             echo "<script>getArticleList('$boardname','$link');</script>";
         }
-         //讀取文章
-         function getArticle($docId,$link)
-         {
+        //讀取文章
+        function getArticle($docId,$link)
+        {
             echo "<script>getArticle('$docId','$link');</script>";
-         }       
+        }   
+        //刊登諮商
+        function postAsk($ask)
+        {
+            echo "<script>postAsk(".$ask.");</script>";
+        }    
+        //讀取諮商列表
+        function getAskList($link)
+        {
+            echo "<script>getAskList('$link');</script>";
+        }
+        //讀取諮商
+        function getAsk($docId,$link)
+        {
+            echo "<script>getAsk('$docId','$link');</script>";
+        }
+        //預約諮商
+        function reserve($docId,$ask)
+        {
+            echo "<script>reserve('$docId',".$ask.");</script>";
+        }
+        //寫入諮商
+        function writeAsk($docId,$json,$id)
+        {
+            echo "writeAskFirebase('$docId',".$json.",'$id');";
+        }
     }
 ?>

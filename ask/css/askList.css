@@ -1,0 +1,15 @@
+*
+{
+    text-decoration: none;
+    color:black;
+}
+.ask
+{
+    display: flex;
+    flex-direction: column;
+}
+.block
+{
+    border: 1px solid black;
+    margin-top: 20px;
+}

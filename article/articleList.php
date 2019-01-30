@@ -15,5 +15,5 @@
     <link rel="stylesheet" href="css/articleList.css">
 </head>
 <div id="articlelist">
-    <script>writeArticleList('<?=$json?>',"articlelist");</script>
+    <script>writeArticleList(<?=$json?>,"articlelist");</script>
 </div>
