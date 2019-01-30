@@ -5,6 +5,39 @@ body
 .left
 {
     width:50%;
+    display: flex;
+    justify-content: center;
+}
+.form
+{
+    width: 80%;
+}
+.form form
+{
+    display: flex;
+    flex-direction: column;
+}
+#name
+{
+   margin-bottom: 20px; 
+}
+#detail
+{
+    height: 200px;
+    margin-bottom: 20px; 
+}
+#submit
+{
+    align-self: center;
+    margin-top: 20px;
+}
+/* 時間 */
+.right
+{
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .time
 {
@@ -13,25 +46,17 @@ body
 }
 .block
 {
-    width: 100%;
-}
-#name
-{
-    width: 100%;
-}
-#detail
-{
-    width: 100%;
-    height: 200px;
+    margin-top: 20px;
 }
 .hour
 {
     margin-left: 20px;
 }
-.right
+#add
 {
-    width:50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-left: 20px;
+}
+.delete
+{
+    margin-left: 20px;
 }

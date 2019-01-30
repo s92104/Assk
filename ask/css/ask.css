@@ -1,3 +1,8 @@
+*
+{
+    text-decoration: none;
+    color: black;
+}
 html,body
 {
     height: 100%;
@@ -9,7 +14,16 @@ body
 }
 a
 {
+    margin: 10px 10px 10px 0;
     width: 10%;
+    background: lightgray;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+a:hover
+{
+    background: lightcoral;
 }
 .askContent
 {

@@ -476,6 +476,20 @@ function writeArticle(json,id)
     div.appendChild(contentDiv);
 }
 //----------Ask----------
+//數字轉換星期
+function dateToString(date)
+{
+    switch(date)
+    {
+        case "1":case 1:return "一";
+        case "2":case 2:return "二";
+        case "3":case 3:return "三";
+        case "4":case 4:return "四";
+        case "5":case 5:return "五";
+        case "6":case 6:return "六";
+        case "7":case 7:return "日";
+    }
+}
 //寫入時間選項
 function writeTimeOption(dateClass,hourClass,minuteClass)
 {
@@ -486,7 +500,7 @@ function writeTimeOption(dateClass,hourClass,minuteClass)
     for(var i=1;i<8;i++)
     {
         var option=document.createElement("option");
-        option.textContent=i;
+        option.textContent=dateToString(i);
         option.value=i;
         date[0].appendChild(option);
     }
@@ -524,10 +538,11 @@ function addTime(divId,formId,dateClass,hourClass,minuteClass)
     var div=document.getElementById(divId);
     var block=document.createElement("div");
     block.className="block";
-    block.textContent="星期"+date[0].value+" "+hour[0].value+":"+minute[0].value+"~"+hour[1].value+":"+minute[1].value;
+    block.textContent="星期"+dateToString(date[0].value)+" "+hour[0].value+":"+minute[0].value+"~"+hour[1].value+":"+minute[1].value;
     var button=document.createElement("input");
     button.type="button";
     button.value="刪除";
+    button.className="delete";
     // 刪除
     button.onclick=function(){
         button.parentNode.parentNode.removeChild(block);
@@ -665,7 +680,7 @@ function writeAskFirebase(docId,ask,divId)
     {
         var time=document.createElement("div")
         time.className="time";
-        time.textContent="星期"+date[i]+" "+hourStart[i]+":"+minuteStart[i]+"~"+hourEnd[i]+":"+minuteEnd[i];
+        time.textContent="星期"+dateToString(date[i])+" "+hourStart[i]+":"+minuteStart[i]+"~"+hourEnd[i]+":"+minuteEnd[i];
         timeDiv.appendChild(time);
     }
     div.appendChild(timeDiv);
@@ -685,7 +700,7 @@ function writeAskFirebase(docId,ask,divId)
             
             var reserve=document.createElement("div");
             reserve.className="reserve";
-            reserve.textContent="星期"+date+" "+hourStart+":"+minuteStart+"~"+hourEnd+":"+minuteEnd;
+            reserve.textContent="星期"+dateToString(date)+" "+hourStart+":"+minuteStart+"~"+hourEnd+":"+minuteEnd;
             reserveDiv.appendChild(reserve);
         });
     });
