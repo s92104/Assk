@@ -709,7 +709,61 @@ function writeAskFirebase(docId,ask,divId)
 //預約諮商
 function reserve(docId,ask)
 {
-    firestore.collection("reserve").add(ask).then(function(){
-        location.href="askContent.php?docId="+docId;
+    var date=parseInt(ask.date);
+    var hourStart=parseInt(ask.hourStart);
+    var minuteStart=parseInt(ask.minuteStart);
+    var hourEnd=parseInt(ask.hourEnd);
+    var minuteEnd=parseInt(ask.minuteEnd);
+    var timeStart=hourStart*60+minuteStart;
+    var timeEnd=hourEnd*60+minuteEnd;
+
+    firestore.collection("ask").doc(docId).get().then(function(doc){
+        var data=doc.data();
+        var dates=data.date;
+        var hourStarts=data.hourStart;
+        var minuteStarts=data.minuteStart;
+        var hourEnds=data.hourEnd;
+        var minuteEnds=data.minuteEnd;
+        var check=false;
+        // 檢查
+        for(var i=0;i<dates.length;i++)
+        {
+            var askStart=parseInt(hourStarts[i])*60+parseInt(minuteStarts[i]);
+            var askEnd=parseInt(hourEnds[i])*60+parseInt(minuteEnds[i]);
+            // 檢查諮商時間
+            if(date==parseInt(dates[i]) && timeStart<timeEnd && timeStart>=askStart && timeStart<askEnd && timeEnd<=askEnd)
+            {
+                check=true;
+                firestore.collection("reserve").add(ask).then(function(){
+                    exception("預約成功","askContent.php?docId="+docId); 
+                });
+                // 檢查是否有預約
+                /*firestore.collection("reserve").where("docId","==",docId).get().then(function(querySnapshot){
+                    var check=true;
+                    querySnapshot.forEach(function(doc){
+                        var data=doc.data();
+                        var date2=data.date;
+                        var hourStart2=data.hourStart;
+                        var minuteStart2=data.minuteStart;
+                        var hourEnd2=data.hourEnd;
+                        var minuteEnd2=data.minuteEnd;
+                        var reserveStart=parseInt(hourStart2)*60+parseInt(minuteStart2);
+                        var reserveEnd=parseInt(hourEnd2)*60+parseInt(minuteEnd2);
+                        if(parseInt(date2)==date && ((timeStart<=reserveStart&&timeEnd>reserveStart) || (timeStart<reserveEnd&&timeEnd>reserveStart) || (timeStart>=reserveStart&&timeEnd<=reserveEnd)))
+                            check=false;
+                    });
+                    if(!check)
+                        exception("已有人預約","reserveForm.php?docId="+docId);
+                    else
+                    {
+                        firestore.collection("reserve").add(ask).then(function(){
+                            exception("預約成功","askContent.php?docId="+docId); 
+                        });
+                    }
+                })*/
+            }
+            else if(i==dates.length-1 && !check)
+                exception("超出預約時間","reserveForm.php?docId="+docId);
+        }
     });
 }

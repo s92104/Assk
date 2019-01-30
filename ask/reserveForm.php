@@ -13,10 +13,12 @@
     <body>
         <div class="form">
             <form action="reserve.php?docId=<?=$docId?>" method="POST" id="form">
-                名稱<br>
-                <input type="text" id="name" name="name"><br>
-                詳細<br>
-                <textarea id="detail" name="detail"></textarea><br>
+                <div class="title">名稱</div> 
+                <input type="text" id="name" name="name">
+                <div class="title">詳細</div> 
+                <textarea id="detail" name="detail"></textarea>
+            </form>
+            <div class="time">
                 星期<select class="date" name="date"></select>
                 <!-- 開始 -->
                 <select class="hour" name="hourStart"></select>:
@@ -27,7 +29,10 @@
                 <script>writeTimeOption("date","hour","minute");</script>
 
                 <input type="submit" id="submit">
-            </form>
-        </div>        
+            </div>
+        </div>   
+        <div class="right">
+            <iframe src=<?php echo "askContent.php?docId=".$docId; ?> frameborder="0"></iframe>
+        </div>     
     </body>
 </html>
