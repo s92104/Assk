@@ -52,7 +52,7 @@
         abstract function getAskList($type,$link);
         abstract function getAsk($docId,$link);
         abstract function reserve($docId,$ask);
-        abstract function writeAsk($docId,$json,$id);
+        abstract function writeAsk($username,$docId,$json,$id);
         abstract function applyType($json);
         abstract function getApplyType($link);
         abstract function deleteApplyType($typename);
@@ -148,9 +148,9 @@
             echo "<script>reserve('$docId',".$ask.");</script>";
         }
         //寫入諮商
-        function writeAsk($docId,$json,$id)
+        function writeAsk($username,$docId,$json,$id)
         {
-            echo "writeAskFirebase('$docId',".$json.",'$id');";
+            echo "writeAskFirebase('$username','$docId',".$json.",'$id');";
         }
         //請求種類
         function applyType($json)

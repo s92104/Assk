@@ -698,10 +698,10 @@ function getAsk(docId,link)
     });
 }
 //寫入諮商
-function writeAskFirebase(docId,ask,divId)
+function writeAskFirebase(username,docId,ask,divId)
 {
     var div=document.getElementById(divId);
-    var username=ask.username;
+    var author=ask.username;
     var name=ask.name;
     var detail=ask.detail;
     var date=ask.date;
@@ -712,7 +712,7 @@ function writeAskFirebase(docId,ask,divId)
 
     // 刊登者
     var usernameDiv=document.createElement("div");
-    usernameDiv.textContent="刊登者:"+username;
+    usernameDiv.textContent="刊登者:"+author;
     usernameDiv.className="username";
     div.appendChild(usernameDiv);
     // 名稱
@@ -754,6 +754,24 @@ function writeAskFirebase(docId,ask,divId)
             var reserve=document.createElement("div");
             reserve.className="reserve";
             reserve.textContent="星期"+dateToString(date)+" "+timeAddZero(hourStart)+":"+timeAddZero(minuteStart)+"~"+timeAddZero(hourEnd)+":"+timeAddZero(minuteEnd);
+            // 刊登者顯示詳細資料
+            if(author==username)
+            {
+                var reserveUsername=data.username;
+                var name=data.name;
+                var detail=data.detail;
+
+                var reserveUsernameDiv=document.createElement("div");
+                reserveUsernameDiv.textContent="預約者:"+reserveUsername;
+                reserve.appendChild(reserveUsernameDiv);
+                var reserveName=document.createElement("div");
+                reserveName.textContent="名稱:"+name;
+                reserve.appendChild(reserveName);
+                var reserveDetail=document.createElement("div");
+                reserveDetail.className="reserveDetail";
+                reserveDetail.innerHTML=detail;
+                reserve.appendChild(reserveDetail);
+            }            
             reserveDiv.appendChild(reserve);
         });
     });

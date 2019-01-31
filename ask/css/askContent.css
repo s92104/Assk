@@ -20,6 +20,15 @@
 .reserveBlock
 {
     margin-top: 20px;
+    color: red;
+}
+.reserve
+{
+    color: blue;
+}
+.reserveDetail
+{
+    border: 1px solid black;
 }
 a
 {

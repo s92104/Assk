@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    $username=$_SESSION["username"];
     $docId=$_GET["docId"];
 
     include("../Dao.php");
@@ -16,6 +18,6 @@
     <link rel="stylesheet" href="css/askContent.css">
 </head>
 <div id="ask" class="ask">
-    <script><?php $dao->writeAsk($docId,$json,"ask"); ?></script>
+    <script><?php $dao->writeAsk($username,$docId,$json,"ask"); ?></script>
     <a href="reserveForm.php?docId=<?= $docId ?>">預約</a>
 </div>
