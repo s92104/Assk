@@ -2,6 +2,7 @@
     session_start();
     include("../Dao.php");
     $username=$_SESSION["username"];
+    $type=$_POST["type"];
     $name=$_POST["name"];
     $detail=str_replace(chr(13).chr(10),"<br>",$_POST["detail"]);
     $hourStart=$_POST["hourStart"];
@@ -9,13 +10,15 @@
     $hourEnd=$_POST["hourEnd"];
     $minuteEnd=$_POST["minuteEnd"];
     $date=$_POST["date"];
+    $time=time();
+    $click=0;
     //沒選擇
     if($date==null)
     {
         exception("請選擇時間","postAskForm.php");
         exit();
     }
-    $ask=json_encode(array("username"=>$username,"name"=>$name,"detail"=>$detail,"hourStart"=>$hourStart,"minuteStart"=>$minuteStart,"hourEnd"=>$hourEnd,"minuteEnd"=>$minuteEnd,"date"=>$date));
+    $ask=json_encode(array("username"=>$username,"type"=>$type,"name"=>$name,"detail"=>$detail,"hourStart"=>$hourStart,"minuteStart"=>$minuteStart,"hourEnd"=>$hourEnd,"minuteEnd"=>$minuteEnd,"date"=>$date,"time"=>$time,"click"=>$click));
     
     $dao=initDao();
     $dao->postAsk($ask);

@@ -1,0 +1,32 @@
+*
+{
+    text-decoration: none;
+    color: black;
+}
+.applyask
+{   
+    height: 100%;
+}
+.typename 
+{
+    display: flex;
+    justify-content: flex-end;
+}
+.content
+{
+    margin-right: auto
+}
+.add
+{
+    border: 1px solid black;
+    margin-right: 20px;
+}
+.delete
+{
+    border: 1px solid red;
+}
+.typedetail
+{
+    width: 100%;
+    border: 1px solid black;
+}

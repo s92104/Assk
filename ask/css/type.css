@@ -1,0 +1,31 @@
+*
+{
+    text-decoration: none;
+    color: black;
+}
+body
+{
+    margin: 0;
+}
+ul
+{
+   margin: 0;
+   padding: 0;
+   list-style: none; 
+}
+li
+{
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    background: lightblue;
+    display: flex;
+}
+a
+{
+    width: 100%;
+}
+a:hover
+{
+    background: lightpink;
+}

@@ -10,7 +10,8 @@
     $hourEnd=$_POST["hourEnd"];
     $minuteEnd=$_POST["minuteEnd"];
     $date=$_POST["date"];
-    $ask=json_encode(array("docId"=>$docId,"username"=>$username,"name"=>$name,"detail"=>$detail,"hourStart"=>$hourStart,"minuteStart"=>$minuteStart,"hourEnd"=>$hourEnd,"minuteEnd"=>$minuteEnd,"date"=>$date));
+    $time=intval($date)*24*60+intval($hourStart)*60+intval($minuteStart);
+    $ask=json_encode(array("docId"=>$docId,"username"=>$username,"name"=>$name,"detail"=>$detail,"hourStart"=>$hourStart,"minuteStart"=>$minuteStart,"hourEnd"=>$hourEnd,"minuteEnd"=>$minuteEnd,"date"=>$date,"time"=>$time));
     
     $dao=initDao();
     $dao->reserve($docId,$ask);

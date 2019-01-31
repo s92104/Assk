@@ -1,9 +1,11 @@
 <?php    
+    $type=$_GET["type"];
+
     include("../Dao.php");
     $dao=initDao();
     if($_GET["ask"]==null)
     {
-        $dao->getAskList("askList.php");
+        $dao->getAskList($type,"askList.php");
         exit();
     }
     $json=$_GET["ask"];

@@ -27,6 +27,11 @@
     {
         echo "<script>showApplyBoardBtn('$id')</script>";
     }
+    //顯示諮商請求按鈕
+    function showApplyTypeBtn($id)
+    {
+        echo "<script>showApplyTypeBtn('$id')</script>";
+    }   
 
     abstract class Dao
     {
@@ -44,10 +49,15 @@
         abstract function getArticleList($boardname,$link);
         abstract function getArticle($docId,$link);
         abstract function postAsk($ask);
-        abstract function getAskList($link);
+        abstract function getAskList($type,$link);
         abstract function getAsk($docId,$link);
         abstract function reserve($docId,$ask);
         abstract function writeAsk($docId,$json,$id);
+        abstract function applyType($json);
+        abstract function getApplyType($link);
+        abstract function deleteApplyType($typename);
+        abstract function addType($json);
+        abstract function getType($link);
     }
 
     class Firebase extends Dao
@@ -123,9 +133,9 @@
             echo "<script>postAsk(".$ask.");</script>";
         }    
         //讀取諮商列表
-        function getAskList($link)
+        function getAskList($type,$link)
         {
-            echo "<script>getAskList('$link');</script>";
+            echo "<script>getAskList('$type','$link');</script>";
         }
         //讀取諮商
         function getAsk($docId,$link)
@@ -141,6 +151,31 @@
         function writeAsk($docId,$json,$id)
         {
             echo "writeAskFirebase('$docId',".$json.",'$id');";
+        }
+        //請求種類
+        function applyType($json)
+        {
+            echo "<script>applyType(".$json.");</script>";
+        }
+        //讀取看板請求
+        function getApplyType($link)
+        {
+            echo "<script>getApplyType('$link');</script>";
+        }
+        //刪除看板請求
+        function deleteApplyType($typename)
+        {
+            echo "<script>deleteApplyType('$typename');</script>";
+        }
+        //新增種類
+        function addType($json)
+        {
+            echo "<script>addType(".$json.");</script>";
+        }     
+        //讀取種類
+        function getType($link)
+        {
+            echo "<script>getType('$link');</script>";
         }
     }
 ?>

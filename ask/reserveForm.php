@@ -17,8 +17,6 @@
                 <input type="text" id="name" name="name">
                 <div class="title">詳細</div> 
                 <textarea id="detail" name="detail"></textarea>
-            </form>
-            <div class="time">
                 星期<select class="date" name="date"></select>
                 <!-- 開始 -->
                 <select class="hour" name="hourStart"></select>:
@@ -26,10 +24,10 @@
                 <!-- 結束 -->
                 <select class="hour" name="hourEnd"></select>:
                 <select class="minute" name="minuteEnd"></select>
-                <script>writeTimeOption("date","hour","minute");</script>
+                <script>writeTimeOption("date","hour","minute");</script> 
 
                 <input type="submit" id="submit">
-            </div>
+            </form>
         </div>   
         <div class="right">
             <iframe src=<?php echo "askContent.php?docId=".$docId; ?> frameborder="0"></iframe>

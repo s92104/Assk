@@ -31,6 +31,27 @@ function transferParent(link)
 {
     parent.location.href=link;
 }
+//時間補零
+function timeAddZero(time)
+{
+    if(time<10)
+        return time="0"+time;
+    return time;
+}
+//數字轉換星期
+function dateToString(date)
+{
+    switch(date)
+    {
+        case "1":case 1:return "一";
+        case "2":case 2:return "二";
+        case "3":case 3:return "三";
+        case "4":case 4:return "四";
+        case "5":case 5:return "五";
+        case "6":case 6:return "六";
+        case "7":case 7:return "日";
+    }
+}
 
 //----------Member----------
 //註冊
@@ -347,7 +368,7 @@ function postArticle(json)
         exception("發文成功","articleList.php?board="+article.board);
     });
 }
-//讀取文章
+//讀取文章列表
 function getArticleList(boardname,link)
 {
     if(boardname=="hot")
@@ -381,6 +402,10 @@ function getArticleList(boardname,link)
     
             location.href=link+"?articleList="+json;
         });
+    }
+    else if(boardname=="trace")
+    {
+
     }
     else
     {
@@ -446,14 +471,11 @@ function writeArticle(json,id)
     var month=time.getMonth()+1;
     var date=time.getDate();
     var hour=time.getHours();
-    if(hour<10)
-        hour="0"+hour;
+    hour=timeAddZero(hour);
     var minute=time.getMinutes();
-    if(minute<10)
-        minute="0"+minute;
+    minute=timeAddZero(minute);
     var second=time.getSeconds();
-    if(second<10)
-        second="0"+second;
+    second=timeAddZero(second);
 
     //div
     var div=document.getElementById(id);
@@ -476,20 +498,6 @@ function writeArticle(json,id)
     div.appendChild(contentDiv);
 }
 //----------Ask----------
-//數字轉換星期
-function dateToString(date)
-{
-    switch(date)
-    {
-        case "1":case 1:return "一";
-        case "2":case 2:return "二";
-        case "3":case 3:return "三";
-        case "4":case 4:return "四";
-        case "5":case 5:return "五";
-        case "6":case 6:return "六";
-        case "7":case 7:return "日";
-    }
-}
 //寫入時間選項
 function writeTimeOption(dateClass,hourClass,minuteClass)
 {
@@ -538,7 +546,7 @@ function addTime(divId,formId,dateClass,hourClass,minuteClass)
     var div=document.getElementById(divId);
     var block=document.createElement("div");
     block.className="block";
-    block.textContent="星期"+dateToString(date[0].value)+" "+hour[0].value+":"+minute[0].value+"~"+hour[1].value+":"+minute[1].value;
+    block.textContent="星期"+dateToString(date[0].value)+" "+timeAddZero(hour[0].value)+":"+timeAddZero(minute[0].value)+"~"+timeAddZero(hour[1].value)+":"+timeAddZero(minute[1].value);
     var button=document.createElement("input");
     button.type="button";
     button.value="刪除";
@@ -587,26 +595,67 @@ function addTime(divId,formId,dateClass,hourClass,minuteClass)
 function postAsk(ask)
 {
     firestore.collection("ask").add(ask).then(function(){
-        location.href="ask.html";
+        location.href="askList.php?type="+ask.type;
     });
 }
 //讀取諮商列表
-function getAskList(link)
+function getAskList(type,link)
 {
-    var askList=[];
-    firestore.collection("ask").get().then(function(querySnapshot){
-        querySnapshot.forEach(function(doc){
-            var data=doc.data();
-            var username=data.username;
-            var name=data.name;
-            var detail=data.detail;
-            var docId=doc.id;
-            var ask={"username":username,"name":name,"detail":detail,"docId":docId};
-            askList.push(ask);
+    if(type=="hot")
+    {
+        var askList=[];
+        firestore.collection("ask").orderBy("click","desc").get().then(function(querySnapshot){
+            querySnapshot.forEach(function(doc){
+                var data=doc.data();
+                var username=data.username;
+                var name=data.name;
+                var detail=data.detail;
+                var docId=doc.id;
+                var ask={"username":username,"name":name,"detail":detail,"docId":docId};
+                askList.push(ask);
+            });
+            var json=JSON.stringify(askList);
+            location.href=link+"?ask="+json;
         });
-        var json=JSON.stringify(askList);
-        location.href=link+"?ask="+json;
-    });
+    }
+    else if(type=="all")
+    {
+        var askList=[];
+        firestore.collection("ask").orderBy("time","desc").get().then(function(querySnapshot){
+            querySnapshot.forEach(function(doc){
+                var data=doc.data();
+                var username=data.username;
+                var name=data.name;
+                var detail=data.detail;
+                var docId=doc.id;
+                var ask={"username":username,"name":name,"detail":detail,"docId":docId};
+                askList.push(ask);
+            });
+            var json=JSON.stringify(askList);
+            location.href=link+"?ask="+json;
+        });
+    }
+    else if(type=="trace")
+    {
+
+    }
+    else
+    {
+        var askList=[];
+        firestore.collection("ask").where("type","==",type).get().then(function(querySnapshot){
+            querySnapshot.forEach(function(doc){
+                var data=doc.data();
+                var username=data.username;
+                var name=data.name;
+                var detail=data.detail;
+                var docId=doc.id;
+                var ask={"username":username,"name":name,"detail":detail,"docId":docId};
+                askList.push(ask);
+            });
+            var json=JSON.stringify(askList);
+            location.href=link+"?ask="+json;
+        });
+    }
 }
 //寫入諮商列表
 function writeAskList(ask,divId)
@@ -639,9 +688,13 @@ function getAsk(docId,link)
         var minuteStart=data.minuteStart;
         var hourEnd=data.hourEnd;
         var minuteEnd=data.minuteEnd;
+        var click=data.click;
         var ask={"docId":docId,"username":username,"name":name,"detail":detail,"date":date,"hourStart":hourStart,"minuteStart":minuteStart,"hourEnd":hourEnd,"minuteEnd":minuteEnd}
         var json=JSON.stringify(ask);
-        location.href=link+"?ask="+json;
+        
+        firestore.collection("ask").doc(docId).update({"click":click+1}).then(function(){
+            location.href=link+"?ask="+json;
+        });
     });
 }
 //寫入諮商
@@ -680,7 +733,7 @@ function writeAskFirebase(docId,ask,divId)
     {
         var time=document.createElement("div")
         time.className="time";
-        time.textContent="星期"+dateToString(date[i])+" "+hourStart[i]+":"+minuteStart[i]+"~"+hourEnd[i]+":"+minuteEnd[i];
+        time.textContent="星期"+dateToString(date[i])+" "+timeAddZero(hourStart[i])+":"+timeAddZero(minuteStart[i])+"~"+timeAddZero(hourEnd[i])+":"+timeAddZero(minuteEnd[i]);
         timeDiv.appendChild(time);
     }
     div.appendChild(timeDiv);
@@ -688,7 +741,7 @@ function writeAskFirebase(docId,ask,divId)
     var reserveDiv=document.createElement("div");
     reserveDiv.className="reserveBlock";
     reserveDiv.innerHTML="已預約:";
-    firestore.collection("reserve").where("docId","==",docId).get().then(function(querySnapshot){
+    firestore.collection("reserve").where("docId","==",docId).orderBy("time").get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc)
         {
             var data=doc.data();
@@ -700,7 +753,7 @@ function writeAskFirebase(docId,ask,divId)
             
             var reserve=document.createElement("div");
             reserve.className="reserve";
-            reserve.textContent="星期"+dateToString(date)+" "+hourStart+":"+minuteStart+"~"+hourEnd+":"+minuteEnd;
+            reserve.textContent="星期"+dateToString(date)+" "+timeAddZero(hourStart)+":"+timeAddZero(minuteStart)+"~"+timeAddZero(hourEnd)+":"+timeAddZero(minuteEnd);
             reserveDiv.appendChild(reserve);
         });
     });
@@ -734,12 +787,8 @@ function reserve(docId,ask)
             if(date==parseInt(dates[i]) && timeStart<timeEnd && timeStart>=askStart && timeStart<askEnd && timeEnd<=askEnd)
             {
                 check=true;
-                firestore.collection("reserve").add(ask).then(function(){
-                    exception("預約成功","askContent.php?docId="+docId); 
-                });
                 // 檢查是否有預約
-                /*firestore.collection("reserve").where("docId","==",docId).get().then(function(querySnapshot){
-                    var check=true;
+                firestore.collection("reserve").where("docId","==",docId).get().then(function(querySnapshot){
                     querySnapshot.forEach(function(doc){
                         var data=doc.data();
                         var date2=data.date;
@@ -749,7 +798,7 @@ function reserve(docId,ask)
                         var minuteEnd2=data.minuteEnd;
                         var reserveStart=parseInt(hourStart2)*60+parseInt(minuteStart2);
                         var reserveEnd=parseInt(hourEnd2)*60+parseInt(minuteEnd2);
-                        if(parseInt(date2)==date && ((timeStart<=reserveStart&&timeEnd>reserveStart) || (timeStart<reserveEnd&&timeEnd>reserveStart) || (timeStart>=reserveStart&&timeEnd<=reserveEnd)))
+                        if(parseInt(date2)==date && ((timeStart>=reserveStart&&timeStart<reserveEnd) || (timeEnd>reserveStart&&timeEnd<=reserveEnd) || (timeStart<reserveStart&&timeEnd>reserveEnd)))
                             check=false;
                     });
                     if(!check)
@@ -760,10 +809,172 @@ function reserve(docId,ask)
                             exception("預約成功","askContent.php?docId="+docId); 
                         });
                     }
-                })*/
+                });
             }
             else if(i==dates.length-1 && !check)
                 exception("超出預約時間","reserveForm.php?docId="+docId);
         }
     });
+}
+//顯示諮商請求按鈕
+function showApplyTypeBtn(id)
+{
+    var div=document.getElementById(id);
+    var a=document.createElement("a");
+    a.textContent="種類請求";
+    a.href="applyTypeList.php";
+    a.target="ask";
+    div.appendChild(a);
+}
+//請求種類
+function applyType(json)
+{
+    var applyType=json;
+    var username=applyType.username;
+    var permission=applyType.permission;
+    var name=applyType.typename;
+    var detail=applyType.typedetail;
+
+    var ask={"username":username,"permission":permission,"detail":detail};
+    firestore.collection("applytype").doc(name).set(ask).then(function(){
+        exception("請求成功","ask.php");
+    });
+}
+//讀取種類請求
+function getApplyType(link)
+{
+    var applyType=[];
+    firestore.collection("applytype").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            var data=doc.data();
+            var username=data.username;
+            var permission=data.permission;
+            var typename=doc.id;
+            var typedetail=data.detail;
+            var type={"username":username,"permission":permission,"typename":typename,"typedetail":typedetail};
+            applyType.push(type);
+        });
+        var json=JSON.stringify(applyType);
+        location.href=link+"?applytype="+json;
+    });
+}
+//寫入種類請求
+function writeApplyType(json,id)
+{
+    var div=document.getElementById(id);
+    var applyType=json;
+    for(var i=0;i<applyType.length;i++)
+    {
+        var typename=applyType[i].typename;
+        var typedetail=applyType[i].typedetail;
+        var type=JSON.stringify(applyType[i]);
+
+        //typename
+        var name=document.createElement("div");
+        name.className="typename";
+        //content
+        var content=document.createElement("div");
+        content.className="content";
+        content.textContent=typename;
+        name.appendChild(content);
+        //add
+        var add=document.createElement("a");
+        add.className="add";
+        add.textContent="新增";
+        add.href="addType.php?type="+type;
+        name.appendChild(add);
+        //delete
+        var del=document.createElement("a");
+        del.className="delete";
+        del.textContent="刪除";
+        del.href="deleteApplyType.php?typename="+typename;
+        name.appendChild(del);
+        div.appendChild(name);
+        //typedetail
+        var detail=document.createElement("div");
+        detail.className="typedetail";
+        detail.innerHTML=typedetail
+        div.appendChild(detail);
+    }
+}
+//刪除種類請求
+function deleteApplyType(typename)
+{
+    firestore.collection("applytype").doc(typename).delete().then(function(){
+        exception("刪除成功","applyTypeList.php");
+    });
+}
+//寫入選擇種類
+function writeSelectType(json,id)
+{
+    var type=json;
+    var select=document.getElementById(id);
+    for(var i=0;i<type.length;i++)
+    {
+        var option=document.createElement("option");
+        option.value=type[i];
+        option.textContent=type[i];
+        select.appendChild(option);
+    }
+}
+//新增種類
+function addType(json)
+{
+    var applyType=json;
+    var username=applyType["username"];
+    var permission=applyType["permission"];
+    var typename=applyType["typename"];
+    var typedetail=applyType["typedetail"];
+    //版主資料
+    var mod=[];
+    if(permission=="user")
+    {
+        mod.push(username);
+    }
+    var type={"moderator":mod,"detail":typedetail,"announcement":""};
+
+    firestore.collection("type").doc(typename).set(type).then(function(){
+        //刷新Board
+        parent.type.location.href="type.php";
+        firestore.collection("applytype").doc(typename).delete().then(function(){
+            //給版主
+            if(permission=="user")
+            {
+                firestore.collection("user").doc(username).update({"permission":typename}).then(function(){
+                    exception("新增成功","applyTypeList.php");
+                });
+            }
+            else
+                exception("新增成功","applyTypeList.php");
+        });   
+    });
+}
+//讀取種類
+function getType(link)
+{
+    var type=[];
+
+    firestore.collection("type").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+            type.push(doc.id);
+        });
+        var json=JSON.stringify(type);
+        location.href=link+"?type="+json;
+    });
+}
+//寫入種類
+function writeType(json,id)
+{
+    var type=json;
+    var ul=document.getElementById(id);
+    for(var i=0;i<type.length;i++)
+    {
+        var li=document.createElement("li");
+        var a=document.createElement("a");
+        a.textContent=type[i];
+        a.href="askList.php?type="+type[i];
+        a.target="ask";
+        li.appendChild(a);
+        ul.appendChild(li);
+    }
 }

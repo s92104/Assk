@@ -7,11 +7,6 @@ body
 {
     width: 50%;
 }
-.form form
-{
-    display: flex;
-    flex-direction: column;
-}
 #name
 {
     width: 100%;

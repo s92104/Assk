@@ -1,8 +1,19 @@
 <?php
     session_start();
-    if($_SESSION["username"]==null)
-        header("Location:../member/login.html");
     include("../Dao.php");
+    if($_SESSION["username"]==null)
+    {
+        transferParent("../member/login.html");
+        exit();
+    }
+    
+    $dao=initDao();
+   if($_GET["type"]==null)
+    {
+        $dao->getType("postAskForm.php");
+        exit();
+    }
+    $json=$_GET["type"];
 ?>
 <head>
     <meta charset="utf-8"/>
@@ -13,6 +24,10 @@
         <div class="left">
             <div class="form">
                 <form action="postAsk.php" method="POST" id="form">
+                    <div class="title">諮商種類</div>
+                    <select name="type" id="type">
+                        <script>writeSelectType(<?=$json?>,'type');</script>
+                    </select> 
                     <div class="title">名稱</div> 
                     <input type="text" id="name" name="name">
                     <div class="title">詳細</div> 
