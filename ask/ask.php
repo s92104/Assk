@@ -15,7 +15,7 @@
             <a href="askList.php?type=hot" target="ask" id="hot">熱門</a>
             <a href="askList.php?type=trace" target="ask" id="trace">追蹤</a>
             <div class="typecontent">
-                <iframe src="type.php" width="100%" frameborder="0" name="type"></iframe>
+                <iframe src="type.php" width="100%" height="100%" frameborder="0" name="type"></iframe>
             </div>
             <a href="applyTypeForm.php">申請種類</a>
             <!-- 管理員 -->
@@ -25,7 +25,7 @@
             ?>
         </div>
         <div class="askContent">
-            <iframe name="ask" src="askList.php?type=hot" frameborder="0"></iframe>
+            <iframe name="ask" src="askList.php?type=hot" width="100%" height="100%" frameborder="0"></iframe>
         </div>
     </body>
 </html>
