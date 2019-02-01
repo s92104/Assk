@@ -3,7 +3,19 @@
     include("../Dao.php");
     if($_SESSION["username"]==null)
         transferParent("../member/login.html");
+    $username=$_SESSION["username"];
     $docId=$_GET["docId"];
+
+    $dao=initDao();
+    if($_GET["ask"]==null)
+    {
+        $dao->getAsk($docId,"reserveForm.php");
+        exit();
+    }
+    $json=$_GET["ask"];
+    $docId=json_decode($json)->docId;
+    if($username==json_decode($json)->username)
+        exception("不能自己預約","askContent.php?docId=".$docId);
 ?>
 <head>
     <meta charset="utf-8"/>
