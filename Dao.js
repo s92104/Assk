@@ -775,7 +775,7 @@ function writeAskFirebase(username,docId,ask,divId)
             if(reserveUsername==username)
             {
                 reserve.textContent+=" (*)";
-                reserve.style.color="green";
+                reserve.style.color="red";
             }       
             reserveDiv.appendChild(reserve);
         });
