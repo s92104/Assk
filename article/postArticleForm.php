@@ -8,12 +8,12 @@
     }
     
     $dao=initDao();
+    $json=$_GET["board"];
    if($_GET["board"]==null)
     {
         $dao->getBoard("postArticleForm.php");
         exit();
     }
-    $json=$_GET["board"];
 ?>
 <!DOCTYPE html>
 <head>

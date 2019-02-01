@@ -3,6 +3,14 @@
     session_start();
     $permission=$_SESSION["permission"];
     include("../Dao.php");
+    $dao=initDao();
+    //讀取看板
+    $json=$_GET["board"];
+    if($json==null)
+    {
+        $dao->getBoard("article.php");
+        exit();
+    }  
 ?>
 <head>
     <meta charset="utf-8"/>
@@ -13,9 +21,11 @@
         <div class="page">
             <div class="board" id="board">
                 <div class="boardcontent">
-                    <iframe src="board.php" width="100%" height="100%" frameborder="0" name="board"></iframe>
+                    <ul id="boardcontent" >
+                        <script>writeBoard(<?=$json?>,"boardcontent");</script>
+                    </ul>
                 </div>
-                <a href="applyBoardForm.php">申請看板</a>
+                <a href="applyBoardForm.php" id="apply">申請看板</a>
                 <!-- 管理員 -->
                 <?php
                     if($permission=="admin")

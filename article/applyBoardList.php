@@ -13,6 +13,5 @@
     <link rel="stylesheet" href="css/applyBoardList.css">
 </head>
 <div class="applyboard" id="applyboard">
-
+    <script>writeApplyBoard(<?=$json?>,"applyboard");</script>
 </div>
-<script>writeApplyBoard(<?=$json?>,"applyboard");</script>

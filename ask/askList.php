@@ -3,12 +3,12 @@
 
     include("../Dao.php");
     $dao=initDao();
-    if($_GET["ask"]==null)
+    $json=$_GET["ask"];
+    if($json==null)
     {
         $dao->getAskList($type,"askList.php");
         exit();
     }
-    $json=$_GET["ask"];
 ?>
 <head>
     <meta charset="utf-8"/>

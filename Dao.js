@@ -278,6 +278,7 @@ function showApplyBoardBtn(id)
 {
     var div=document.getElementById(id);
     var a=document.createElement("a");
+    a.id="apply";
     a.textContent="看板請求";
     a.href="applyBoardList.php";
     a.target="article";
@@ -844,6 +845,7 @@ function showApplyTypeBtn(id)
 {
     var div=document.getElementById(id);
     var a=document.createElement("a");
+    a.id="apply";
     a.textContent="種類請求";
     a.href="applyTypeList.php";
     a.target="ask";

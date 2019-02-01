@@ -8,12 +8,12 @@
     }
     
     $dao=initDao();
-   if($_GET["type"]==null)
+    $json=$_GET["type"];
+    if($_GET["type"]==null)
     {
         $dao->getType("postAskForm.php");
         exit();
     }
-    $json=$_GET["type"];
 ?>
 <head>
     <meta charset="utf-8"/>
@@ -51,7 +51,7 @@
                 <input type="button" onclick="addTime('time','form','date','hour','minute')" value="新增" id="add"> 
             </div>
             <div class="time" id="time">
-                <!-- 動態 -->
+                <!-- addTime -->
             </div>
         </div>
     </body>

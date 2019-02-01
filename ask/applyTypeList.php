@@ -13,6 +13,5 @@
     <link rel="stylesheet" href="css/applyTypeList.css">
 </head>
 <div class="applytype" id="applytype">
-
+    <script>writeApplyType(<?=$json?>,"applytype");</script>
 </div>
-<script>writeApplyType(<?=$json?>,"applytype");</script>

@@ -1,7 +1,15 @@
 <?php
     session_start();
     $permission=$_SESSION["permission"];
+    
     include("../Dao.php");
+    $dao=initDao();
+    $json=$_GET["type"];
+    if($json==null)
+    {
+        $dao->getType("ask.php");
+        exit();
+    }
 ?>
 <head>
     <meta charset="utf-8"/>
@@ -14,10 +22,13 @@
             <a href="askList.php?type=all" target="ask" id="all">全部</a>
             <a href="askList.php?type=hot" target="ask" id="hot">熱門</a>
             <a href="askList.php?type=trace" target="ask" id="trace">追蹤</a>
+            <!-- 種類選單 -->
             <div class="typecontent">
-                <iframe src="type.php" width="100%" height="100%" frameborder="0" name="type"></iframe>
+                <ul id="type" >
+                    <script>writeType(<?=$json?>,"type");</script>
+                </ul>
             </div>
-            <a href="applyTypeForm.php">申請種類</a>
+            <a href="applyTypeForm.php" id="apply">申請種類</a>
             <!-- 管理員 -->
             <?php
                 if($permission=="admin")

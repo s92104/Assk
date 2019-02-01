@@ -5,9 +5,9 @@
         transferParent("../member/login.html");
     $username=$_SESSION["username"];
     $docId=$_GET["docId"];
-    $json=$_GET["ask"];
 
     $dao=initDao();
+    $json=$_GET["ask"];
     if($json==null)
     {
         $dao->getAsk($docId,"reserveForm.php");

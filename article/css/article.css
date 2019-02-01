@@ -27,19 +27,36 @@ body
     width: 15%;
     background: lightgreen;
 }
-.boardcontent
-{
-    margin: 10px 10px 0 10px;
-    height: 100%;
-}
 .board a
 {
-    background: lightsalmon;
     text-align: center;
     height: 40px;
     line-height: 40px;
-    border: 1px solid black;
-    margin: 0 10px 10px 10px;
+}
+.board a:hover
+{
+    background: lightcoral;
+}
+.boardcontent
+{
+    height: 100%;
+}
+ul
+{
+   margin: 0;
+   padding: 0;
+   list-style: none; 
+   width: 100%;
+}
+li
+{
+    background: lightblue;
+    display: flex;
+    flex-direction: column;
+}
+#apply
+{
+    background: lightsalmon;
 }
 /* 文章 */
 .article

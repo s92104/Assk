@@ -1,9 +1,9 @@
 <?php
     $docId=$_GET["docid"];
-    $json=$_GET["article"];
 
     include("../Dao.php");
     $dao=initDao();
+    $json=$_GET["article"];
     if($json==null)
     {
         $dao->getArticle($docId,"articleContent.php");

@@ -2,10 +2,10 @@
     session_start();
     $username=$_SESSION["username"];
     $docId=$_GET["docId"];
-    $json=$_GET["ask"];
-
+    
     include("../Dao.php");
     $dao=initDao();
+    $json=$_GET["ask"];
     if($json==null)
     {
         $dao->getAsk($docId,"askContent.php");
