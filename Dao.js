@@ -745,6 +745,9 @@ function writeAskFirebase(username,docId,ask,divId)
         querySnapshot.forEach(function(doc)
         {
             var data=doc.data();
+            var reserveUsername=data.username;
+            var name=data.name;
+            var detail=data.detail;
             var date=data.date;
             var hourStart=data.hourStart;
             var minuteStart=data.minuteStart;
@@ -756,11 +759,7 @@ function writeAskFirebase(username,docId,ask,divId)
             reserve.textContent="星期"+dateToString(date)+" "+timeAddZero(hourStart)+":"+timeAddZero(minuteStart)+"~"+timeAddZero(hourEnd)+":"+timeAddZero(minuteEnd);
             // 刊登者顯示詳細資料
             if(author==username)
-            {
-                var reserveUsername=data.username;
-                var name=data.name;
-                var detail=data.detail;
-
+            {           
                 var reserveUsernameDiv=document.createElement("div");
                 reserveUsernameDiv.textContent="預約者:"+reserveUsername;
                 reserve.appendChild(reserveUsernameDiv);
@@ -771,7 +770,13 @@ function writeAskFirebase(username,docId,ask,divId)
                 reserveDetail.className="reserveDetail";
                 reserveDetail.innerHTML=detail;
                 reserve.appendChild(reserveDetail);
-            }            
+            }  
+            // 刊登者顯示詳細資料 
+            if(reserveUsername==username)
+            {
+                reserve.textContent+=" (*)";
+                reserve.style.color="green";
+            }       
             reserveDiv.appendChild(reserve);
         });
     });
