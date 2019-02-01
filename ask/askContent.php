@@ -2,16 +2,16 @@
     session_start();
     $username=$_SESSION["username"];
     $docId=$_GET["docId"];
+    $json=$_GET["ask"];
 
     include("../Dao.php");
     $dao=initDao();
-    if($_GET["ask"]==null)
+    if($json==null)
     {
         $dao->getAsk($docId,"askContent.php");
         exit();
     }
-    $json=$_GET["ask"];
-    $docId=json_decode($json)->docId;
+    
 ?>
 <head>
     <meta charset="utf-8"/>

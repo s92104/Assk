@@ -693,7 +693,7 @@ function getAsk(docId,link)
         var json=JSON.stringify(ask);
         
         firestore.collection("ask").doc(docId).update({"click":click+1}).then(function(){
-            location.href=link+"?ask="+json;
+            location.href=link+"?ask="+json+"&docId="+docId;
         });
     });
 }

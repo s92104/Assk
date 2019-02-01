@@ -1,14 +1,15 @@
 <?php
     $docId=$_GET["docid"];
-    
+    $json=$_GET["article"];
+
     include("../Dao.php");
     $dao=initDao();
-    if($_GET["article"]==null)
+    if($json==null)
     {
         $dao->getArticle($docId,"articleContent.php");
         exit();
     }
-    $json=$_GET["article"];
+    
 ?>
 <head>
     <meta charset="utf-8"/>

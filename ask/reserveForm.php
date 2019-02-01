@@ -5,15 +5,14 @@
         transferParent("../member/login.html");
     $username=$_SESSION["username"];
     $docId=$_GET["docId"];
+    $json=$_GET["ask"];
 
     $dao=initDao();
-    if($_GET["ask"]==null)
+    if($json==null)
     {
         $dao->getAsk($docId,"reserveForm.php");
         exit();
     }
-    $json=$_GET["ask"];
-    $docId=json_decode($json)->docId;
     if($username==json_decode($json)->username)
         exception("不能自己預約","askContent.php?docId=".$docId);
 ?>
@@ -41,8 +40,8 @@
                 <input type="submit" id="submit">
             </form>
         </div>   
-        <div class="right">
-            <iframe src=<?php echo "askContent.php?docId=".$docId; ?> frameborder="0"></iframe>
+        <div class="right" id="right">
+            <script><?php $dao->writeAsk($username,$docId,$json,"right"); ?></script>
         </div>     
     </body>
 </html>

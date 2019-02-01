@@ -2,10 +2,12 @@ body
 {
     margin: 0;
     display: flex;
+    justify-content: space-around;
 }
+/* 表單 */
 .form
 {
-    width: 50%;
+    width: 40%;
 }
 #name
 {
@@ -28,12 +30,38 @@ body
 {
     margin-left: 50px;
 }
+/* 右邊 */
 .right
 {
-    width: 50%;
-}
-iframe
-{
-    width: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
     height: 100%;
+}
+.detail
+{
+    border: 1px solid black;
+}
+.timeBlock
+{
+    margin-top: 20px;
+}
+.reserveBlock
+{
+    margin-top: 20px;
+    color: red;
+}
+.reserve
+{
+    color: blue;
+}
+.reserveDetail
+{
+    border: 1px solid black;
+}
+a
+{
+    font-size: 50px;
+    margin-top: auto;
+    align-self: center;
 }
